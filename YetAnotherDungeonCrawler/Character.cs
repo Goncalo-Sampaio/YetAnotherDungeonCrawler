@@ -35,6 +35,7 @@ namespace YetAnotherDungeonCrawler
             }
             else  Health =- damage;
         }
+        //Character Constructor
         public Character(string name,int health, int attack)
         {
             this.Name = name;

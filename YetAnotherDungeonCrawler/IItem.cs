@@ -10,7 +10,13 @@ namespace YetAnotherDungeonCrawler
     /// </summary>
     public interface IItem
     {
+        /// <summary>
+        /// Item's name
+        /// </summary>
         string Name {get; set;}
+        /// <summary>
+        /// Item's effect
+        /// </summary>
         void Use();
         
     }
