@@ -29,6 +29,59 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("");
         }
 
+        //Displace all available actions
+        public int ShowActions()
+        {
+            Console.WriteLine("Your available Actions");
+            Console.WriteLine("-------\n");
+            Console.WriteLine("1. Move");
+            Console.WriteLine("0. Quit game\n");
+            Console.Write("Your choice: ");
+
+            return int.Parse(Console.ReadLine());
+        }
+
+        //Displace all available actions when there is an Item
+        public int ShowActions(Item item)
+        {
+            Console.WriteLine("Your available Actions");
+            Console.WriteLine("-------\n");
+            Console.WriteLine("1. Move");
+            Console.WriteLine($"2. Pick up {Item.item}");
+            Console.WriteLine("0. Quit game\n");
+            Console.Write("Your choice: ");
+
+            return int.Parse(Console.ReadLine());
+        }
+
+        //Displace all available actions when there is an Enemy
+        public int ShowActions(Enemy enemy)
+        {
+            Console.WriteLine("Your available Actions");
+            Console.WriteLine("-------\n");
+            Console.WriteLine("1. Move");
+            Console.WriteLine($"2. Fight {Enemy.enemy}");
+            Console.WriteLine("0. Quit game\n");
+            Console.Write("Your choice: ");
+
+            return int.Parse(Console.ReadLine());
+        }
+
+        //Displace all available actions when there is an Item
+        //And an Enemy
+        public int ShowActions(Item item, Enemy enemy)
+        {
+            Console.WriteLine("Your available Actions");
+            Console.WriteLine("-------\n");
+            Console.WriteLine("1. Move");
+            Console.WriteLine($"2. Pick up {Item.item}");
+            Console.WriteLine($"3. Fight {Enemy.enemy}");
+            Console.WriteLine("0. Quit game\n");
+            Console.Write("Your choice: ");
+
+            return int.Parse(Console.ReadLine());
+        }
+
         //Describing Rooms
         public void ShowRoom(Room room)
         {

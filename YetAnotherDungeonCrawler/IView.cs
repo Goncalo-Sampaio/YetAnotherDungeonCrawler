@@ -9,6 +9,16 @@ namespace YetAnotherDungeonCrawler
 
         void Instructions();
 
+        int ShowActions();
+
+        int ShowActions(Item item);
+
+        int ShowActions(Enemy enemy);
+
+        int ShowActions(Item item, Enemy enemy);
+
+        int ShowDirection();
+
         void ShowRoom();
 
         void MoveDirection();
