@@ -20,7 +20,8 @@ namespace YetAnotherDungeonCrawler
         //Welcome Players
         public void WelcomeMessage()
         {
-            Console.WriteLine("");
+            Console.WriteLine("Welcome to Yet Another Dungeon Crawler!");
+            Console.WriteLine("")
         }
 
         //Tell the Player how to play
@@ -54,20 +55,20 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Displace all available actions when there is an Enemy
+        //Display all available actions when there is an Enemy
         public int ShowActions(Enemy enemy)
         {
             Console.WriteLine("Your available Actions");
             Console.WriteLine("-------\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine($"2. Fight {Enemy.enemy}");
+            Console.WriteLine($"2. Fight {enemy.Name}");
             Console.WriteLine("0. Quit game\n");
             Console.Write("Your choice: ");
 
             return int.Parse(Console.ReadLine());
         }
 
-        //Displace all available actions when there is an Item
+        //Display all available actions when there is an Item
         //And an Enemy
         public int ShowActions(Item item, Character enemy)
         {
@@ -90,7 +91,7 @@ namespace YetAnotherDungeonCrawler
 
         public void MoveDirection(Direction direction)
         {
-            Console.WriteLine($"You moved {Direction.direction}");
+            Console.WriteLine($"You moved {Direction.direction.ToString()}");
         }
 
         //Entering Battle
