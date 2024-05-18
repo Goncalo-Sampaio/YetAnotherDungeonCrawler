@@ -13,8 +13,8 @@ namespace YetAnotherDungeonCrawler
         //View Constructor
         public View(Controller controller, Player player)
         {
-            this controller = controller;
-            this player = player;
+            this.controller = controller;
+            this.player = player;
         }
 
         //Welcome Players
@@ -29,7 +29,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("");
         }
 
-        //Displace all available actions
+        //Display all available actions
         public int ShowActions()
         {
             Console.WriteLine("Your available Actions");
@@ -41,13 +41,13 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Displace all available actions when there is an Item
+        //Display all available actions when there is an Item
         public int ShowActions(Item item)
         {
             Console.WriteLine("Your available Actions");
             Console.WriteLine("-------\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine($"2. Pick up {Item.item}");
+            Console.WriteLine($"2. Pick up {item.Name}");
             Console.WriteLine("0. Quit game\n");
             Console.Write("Your choice: ");
 
@@ -69,13 +69,13 @@ namespace YetAnotherDungeonCrawler
 
         //Displace all available actions when there is an Item
         //And an Enemy
-        public int ShowActions(Item item, Enemy enemy)
+        public int ShowActions(Item item, Character enemy)
         {
             Console.WriteLine("Your available Actions");
             Console.WriteLine("-------\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine($"2. Pick up {Item.item}");
-            Console.WriteLine($"3. Fight {Enemy.enemy}");
+            Console.WriteLine($"2. Pick up {item.Name}");
+            Console.WriteLine($"3. Fight {enemy.Name}");
             Console.WriteLine("0. Quit game\n");
             Console.Write("Your choice: ");
 
