@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace YetAnotherDungeonCrawler
 {
+    /// <summary>
+    /// Item Interface
+    /// </summary>
     public interface IItem
     {
         string Name {get; set;}
