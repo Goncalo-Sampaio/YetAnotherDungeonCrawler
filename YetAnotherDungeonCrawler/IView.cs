@@ -1,13 +1,16 @@
 using System;
+using System.Collections.Generic;
 
 namespace YetAnotherDungeonCrawler
 {
     public interface IView
     {
-        void Welcome();
+        void WelcomeMessage();
 
         void Instructions();
 
         void ShowRoom();
+
+        void EnterBattle();
     }
 }
