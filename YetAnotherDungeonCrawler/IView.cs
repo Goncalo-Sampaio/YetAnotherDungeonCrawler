@@ -11,6 +11,8 @@ namespace YetAnotherDungeonCrawler
 
         void ShowRoom();
 
+        void MoveDirection();
+
         void EnterBattle();
     }
 }

@@ -6,7 +6,7 @@ namespace YetAnotherDungeonCrawler
     public class View : IView
     {
         //Defining Variables
-        private Player player;
+        private Map map;
 
         private Controller controller;
 
@@ -16,21 +16,28 @@ namespace YetAnotherDungeonCrawler
             this controller = controller;
             this player = player;
         }
-        
+
         //Welcome Players
-        void WelcomeMessage()
+        public void WelcomeMessage()
         {
             Console.WriteLine("");
         }
 
-        void Instructions()
+        //Tell the Player how to play
+        public void Instructions()
         {
             Console.WriteLine("");
         }
+
         //Describing Rooms
-        void ShowRoom(Room room)
+        public void ShowRoom(Room room)
         {
             Console.WriteLine("");
+        }
+
+        public void MoveDirection(Direction direction)
+        {
+            Console.WriteLine($"You moved {Direction.direction}");
         }
 
         //Entering Battle
