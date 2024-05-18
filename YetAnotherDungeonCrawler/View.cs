@@ -94,7 +94,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Entering Battle
-        void EnterBattle();
+        void EnterBattle()
         {
             Console.WriteLine("");
         }
