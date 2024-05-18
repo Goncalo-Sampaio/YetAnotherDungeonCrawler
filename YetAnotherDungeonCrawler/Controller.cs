@@ -31,9 +31,27 @@ namespace YetAnotherDungeonCrawler
             while ((s = r.ReadLine()) != null)
             {
                 string[] roomSpecs = s.Split(',');
-                foreach (string i in roomSpecs){
-                    Console.WriteLine(i);
-                }
+                int id = int.Parse(roomSpecs[0]);
+                string enemyName = roomSpecs[1];
+                int enemyHealth = int.Parse(roomSpecs[2]);
+                int enemyDamage = int.Parse(roomSpecs[3]);
+                Enemy enemy = new Enemy(enemyName, enemyHealth, enemyDamage);
+                string item = roomSpecs[4];
+                int north = RoomExit(roomSpecs[5]);
+                int south = RoomExit(roomSpecs[6]);
+                int west = RoomExit(roomSpecs[7]);
+                int east = RoomExit(roomSpecs[8]);
+                int[] exits = new int[4]{north, south, west, east};
+                //rooms.Add(new Room(id,enemy,item,exits));
+            }
+        }
+
+        private int RoomExit(string roomId){
+            if (roomId == "null"){
+                return 0;
+            }
+            else{
+                return int.Parse(roomId);
             }
         }
     }
