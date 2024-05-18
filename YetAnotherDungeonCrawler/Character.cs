@@ -4,18 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace YetAnotherDungeonCrawler
-{
+{   
+    /// <summary>
+    /// Character base class
+    /// </summary>
     public class Character
     {
-        private int Health {get; set;} //protected maybe??
+        //Instance variables
+        private string Name {get; set;}
+        private int Health {get; set;}        
         private int AttackPower {get; set;}
 
-        //maybe abstract check again
+        /// <summary>
+        /// Calls target's TakeDamage() method passing in "origins" AttackPower
+        /// </summary>
+        /// <param name="target">target Character instance</param>
         public void Attack(Character target) 
         {
             target.TakeDamage(AttackPower);
         }
-
+        /// <summary>
+        /// Subtracts damage from Health. Health doesn't go bellow 0.
+        /// </summary>
+        /// <param name="damage">incoming damage value</param>
         public void TakeDamage(int damage)
         {
             if (Health - damage <= 0)
@@ -24,8 +35,9 @@ namespace YetAnotherDungeonCrawler
             }
             else  Health =- damage;
         }
-        public Character(int health, int attack)
+        public Character(string name,int health, int attack)
         {
+            this.Name = name;
             this.Health = health;
             this.AttackPower = attack;
         }

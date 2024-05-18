@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 
 namespace YetAnotherDungeonCrawler
 {
+    /// <summary>
+    /// Enemy Character
+    /// </summary>
     public class Enemy : Character
     {
-        public Enemy (int health, int attack) :base (health,attack)
+        public Enemy (string name,int health, int attack) 
+        :base (name,health,attack)
         {
             
         }

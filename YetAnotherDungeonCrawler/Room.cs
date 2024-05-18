@@ -7,18 +7,18 @@ namespace YetAnotherDungeonCrawler
 {
     public class Room
     {
-        private Enemy Enemy {get; set;}
-        private Item Item  {get; set;}
+        public int Id { get; set; }
+        private Enemy Enemy { get; set; }
+        private Item Item { get; set; }        
+        private int[] exits ;
 
-        //Rooms
-        private Room North  {get; set;}
-        private Room South {get; set;}
-        private Room West {get; set;}
-        private Room East {get; set;}
-
-        private List<Room> Exits;  //for convenience 
-
-        public Room () {}
+        public Room(int id, Enemy enemy, Item Item, int[] exits ) 
+        {
+            this.Id = id;
+            this.Enemy = enemy;
+            this.Item = Item;
+            this.exits = exits;
+        }
 
     }
 
