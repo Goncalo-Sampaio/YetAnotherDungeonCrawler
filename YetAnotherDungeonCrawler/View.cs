@@ -91,6 +91,12 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
+        //
+        public int ShowDirections(Room room)
+        {
+            Console.WriteLine("You")
+        }
+
         //Describing Rooms
         public void ShowRoom(Room room)
         {
@@ -103,7 +109,13 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Entering Battle
-        void EnterBattle()
+        void Attack(int damage)
+        {
+            Console.WriteLine("");
+        }
+
+        //Entering Battle
+        void EnemyAttack(int damage)
         {
             Console.WriteLine("");
         }
