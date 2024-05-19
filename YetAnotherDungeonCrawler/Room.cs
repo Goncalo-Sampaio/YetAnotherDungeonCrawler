@@ -21,17 +21,17 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Item in Room. If none then Item == null
         /// </summary>
-        private Item Item { get; set; }  
+        private IItem Item { get; set; }  
         /// <summary>
         /// Array that contains room Ids at set index.
         /// [0] = North , [1] = South , [2] = East ,[3] = West 
         /// </summary>
         private int[] exits { get; set; }
         //Constructor
-        public Room(int id, Enemy enemy, Item Item, int[] exits ) 
+        public Room(int id, Enemy enemy, IItem Item, int[] exits ) 
         {
-            this.Id = id;
-            this.Enemy = enemy;
+            Id = id;
+            Enemy = enemy;
             this.Item = Item;
             this.exits = exits;
         }

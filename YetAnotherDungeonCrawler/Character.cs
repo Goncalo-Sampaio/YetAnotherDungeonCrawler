@@ -11,7 +11,7 @@ namespace YetAnotherDungeonCrawler
     public class Character
     {
         //Instance variables
-        private string Name {get; set;}
+        public string Name {get;}
         private int Health {get; set;}        
         private int AttackPower {get; set;}
 

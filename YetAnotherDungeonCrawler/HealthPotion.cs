@@ -8,12 +8,12 @@ namespace YetAnotherDungeonCrawler
     /// <summary>
     /// Item class. Implements IItem
     /// </summary>
-    public class Item : IItem
+    public class HealthPotion : IItem
     {
-        public string Name {get; set;}
-        public void Use() 
+        public string Name {get; set;} = "HealthPotion";
+        public void Use(Character player) 
         {
-
+            //player.Health += 10;
         }
     }
 }

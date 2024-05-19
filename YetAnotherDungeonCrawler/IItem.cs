@@ -17,7 +17,6 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Item's effect
         /// </summary>
-        void Use();
-        
+        void Use(Character target);   
     }
 }

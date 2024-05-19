@@ -18,7 +18,7 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Inventory. Uses Item as <key> with <value> being Item's quantity
         /// </summary>
-        private Dictionary<Item, int> Inventory;
+        private Dictionary<IItem, int> Inventory;
         /// <summary>
         /// Player Constructor
         /// </summary>

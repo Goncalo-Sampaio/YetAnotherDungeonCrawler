@@ -20,6 +20,7 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         public void Start()
         {
+            ReadEnemyFile();
             ReadRoomFile();
         }
 
@@ -34,17 +35,29 @@ namespace YetAnotherDungeonCrawler
                 string[] roomSpecs = s.Split(',');
                 int id = int.Parse(roomSpecs[0]);
                 string enemyName = roomSpecs[1];
-                int enemyHealth = int.Parse(roomSpecs[2]);
-                int enemyDamage = int.Parse(roomSpecs[3]);
-                //foreach (Enemy enemy in enemies){}
-                Enemy enemy = new Enemy(enemyName, enemyHealth, enemyDamage);
-                string item = roomSpecs[4];
-                int north = RoomExit(roomSpecs[5]);
-                int south = RoomExit(roomSpecs[6]);
-                int west = RoomExit(roomSpecs[7]);
-                int east = RoomExit(roomSpecs[8]);
+                string item = roomSpecs[2];
+                int north = RoomExit(roomSpecs[3]);
+                int south = RoomExit(roomSpecs[4]);
+                int west = RoomExit(roomSpecs[5]);
+                int east = RoomExit(roomSpecs[6]);
+
+                Enemy roomEnemy = null;
+                foreach (Enemy enemy in enemies)
+                {
+                    if (enemyName == enemy.Name)
+                    {
+                        roomEnemy = enemy;
+                    }
+                }
+
+                IItem roomItem = null;
+                if (item == "HealthPotion"){
+                    roomItem = new HealthPotion();
+                }
+
                 int[] exits = new int[4] { north, south, west, east };
-                //rooms.Add(new Room(id,enemy,item,exits));
+                
+                rooms.Add(new Room(id,roomEnemy,roomItem,exits));
             }
         }
 
@@ -52,7 +65,7 @@ namespace YetAnotherDungeonCrawler
         {
             string s;
             using StreamReader r =
-                new StreamReader("./YetAnotherDungeonCrawler/Rooms.txt");
+                new StreamReader("./YetAnotherDungeonCrawler/Enemies.txt");
 
             while ((s = r.ReadLine()) != null)
             {
