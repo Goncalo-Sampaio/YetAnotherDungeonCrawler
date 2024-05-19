@@ -6,9 +6,10 @@ namespace YetAnotherDungeonCrawler
     public class View : IView
     {
         //Defining Variables
-        private Map map;
+        //private Map map;
 
         private Controller controller;
+        private Player player;
 
         //View Constructor
         public View(Controller controller, Player player)
@@ -42,7 +43,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions when there is an Item
-        public int ShowActions(Item item)
+        public int ShowActions(IItem item)
         {
             Console.WriteLine("Your available Actions");
             Console.WriteLine("-------\n");
@@ -60,7 +61,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("Your available Actions");
             Console.WriteLine("-------\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine($"2. Fight {Enemy.enemy}");
+            //Console.WriteLine($"2. Fight {Enemy.enemy}");
             Console.WriteLine("0. Quit game\n");
             Console.Write("Your choice: ");
 
@@ -69,7 +70,7 @@ namespace YetAnotherDungeonCrawler
 
         //Displace all available actions when there is an Item
         //And an Enemy
-        public int ShowActions(Item item, Character enemy)
+        public int ShowActions(IItem item, Character enemy)
         {
             Console.WriteLine("Your available Actions");
             Console.WriteLine("-------\n");
@@ -90,7 +91,7 @@ namespace YetAnotherDungeonCrawler
 
         public void MoveDirection(Direction direction)
         {
-            Console.WriteLine($"You moved {Direction.direction}");
+            Console.WriteLine($"You moved {direction}");
         }
 
         //Entering Battle

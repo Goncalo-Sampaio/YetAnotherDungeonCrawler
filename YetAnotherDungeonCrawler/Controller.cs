@@ -22,6 +22,37 @@ namespace YetAnotherDungeonCrawler
         {
             ReadEnemyFile();
             ReadRoomFile();
+
+            foreach (Room room in rooms)
+            {
+                Console.WriteLine(room.Id);
+                Console.WriteLine(room.Enemy);
+                Console.WriteLine(room.Item);
+                foreach (int i in room.Exits)
+                {
+                    Console.WriteLine(i);
+                }
+
+                Console.WriteLine("------------------");
+            }
+        }
+
+        private void ReadEnemyFile()
+        {
+            string s;
+            using StreamReader r =
+                new StreamReader("./YetAnotherDungeonCrawler/Enemies.txt");
+
+            while ((s = r.ReadLine()) != null)
+            {
+                string[] enemySpecs = s.Split(',');
+                string enemyName = enemySpecs[0];
+                int enemyHealth = int.Parse(enemySpecs[1]);
+                int enemyAttack = int.Parse(enemySpecs[2]);
+
+                Enemy enemy = new Enemy(enemyName, enemyHealth, enemyAttack);
+                enemies.Add(enemy);
+            }
         }
 
         private void ReadRoomFile()
@@ -51,31 +82,14 @@ namespace YetAnotherDungeonCrawler
                 }
 
                 IItem roomItem = null;
-                if (item == "HealthPotion"){
+                if (item == "HealthPotion")
+                {
                     roomItem = new HealthPotion();
                 }
 
                 int[] exits = new int[4] { north, south, west, east };
-                
-                rooms.Add(new Room(id,roomEnemy,roomItem,exits));
-            }
-        }
 
-        private void ReadEnemyFile()
-        {
-            string s;
-            using StreamReader r =
-                new StreamReader("./YetAnotherDungeonCrawler/Enemies.txt");
-
-            while ((s = r.ReadLine()) != null)
-            {
-                string[] enemySpecs = s.Split(',');
-                string enemyName = enemySpecs[0];
-                int enemyHealth = int.Parse(enemySpecs[1]);
-                int enemyAttack = int.Parse(enemySpecs[2]);
-
-                Enemy enemy = new Enemy(enemyName, enemyHealth, enemyAttack);
-                enemies.Add(enemy);
+                rooms.Add(new Room(id, roomEnemy, roomItem, exits));
             }
         }
 

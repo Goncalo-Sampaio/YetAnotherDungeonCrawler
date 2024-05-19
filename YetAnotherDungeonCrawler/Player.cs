@@ -45,13 +45,13 @@ namespace YetAnotherDungeonCrawler
         ///then increases the count
         /// </summary>
         /// <param name="item">Picked up Item</param>
-        public void PickUpItem(Item item)
+        public void PickUpItem(IItem item)
         {
             if (Inventory.ContainsKey(item)) Inventory[item] += 1; 
             else Inventory.Add(item, 1);
         }
         
-        public void Heal(Item healingPotion)
+        public void Heal()
         {
             //Healing Behavior
         }
