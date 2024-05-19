@@ -56,7 +56,7 @@ namespace YetAnotherDungeonCrawler
                 switch (option)
                 {
                     case 1:
-                        //Move
+                        Move();
                         break;
                     case 2:
                         //Pick Item
@@ -81,6 +81,12 @@ namespace YetAnotherDungeonCrawler
             } while (option != 0);
         }
 
+        /// <summary>
+        /// Method that shows a different menu depending on the current room's
+        /// state
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         private int DifferentMenu(Player player){
             Enemy roomEnemy = player.CurrentRoom.Enemy;
             IItem roomItem = player.CurrentRoom.Item;
@@ -98,7 +104,6 @@ namespace YetAnotherDungeonCrawler
                 return 0;
                 //return view.ShowActions(roomItem, roomEnemy);
             }
-
         }
 
         private void ReadEnemyFile()
@@ -166,6 +171,93 @@ namespace YetAnotherDungeonCrawler
             else
             {
                 return int.Parse(roomId);
+            }
+        }
+
+        private void Move(){
+            Enemy roomEnemy = player.CurrentRoom.Enemy;
+            int[] exits = player.CurrentRoom.Exits;
+            //check if the enemy is defeated first
+            //if its not, show a message and return to menu
+
+            if (roomEnemy != null){
+                //VIEW : tell the player he needs to defeat the enemy first
+                return;
+            }
+
+            int exitOption;
+
+            do
+            {
+                // VIEW :
+                //Shows the player the available exits and asks for input
+                exitOption = int.Parse(Console.ReadLine());
+
+                // Determine the option specified by the user and act on it
+                switch (exitOption)
+                {
+                    case 1:
+                        if (player.CurrentRoom.Exits[0] == 0){
+                            InvalidExit();
+                        }
+                        else {
+                            MovePlayer(player.CurrentRoom.Exits[0]);
+                        }
+                        break;
+                    case 2:
+                        if (player.CurrentRoom.Exits[1] == 0){
+                            InvalidExit();
+                        }
+                        else {
+                            MovePlayer(player.CurrentRoom.Exits[1]);
+                        }
+                        break;
+                    case 3:
+                        if (player.CurrentRoom.Exits[2] == 0){
+                            InvalidExit();
+                        }
+                        else {
+                            MovePlayer(player.CurrentRoom.Exits[2]);
+                        }
+                        break;
+                    case 4:
+                        if (player.CurrentRoom.Exits[3] == 0){
+                            InvalidExit();
+                        }
+                        else {
+                            MovePlayer(player.CurrentRoom.Exits[3]);
+                        }
+                        break;
+                    case 0:
+                        //Back to Menu
+                        break;
+                    default:
+                        InvalidExit();
+                        break;
+                }
+
+                //After Menu message
+
+                // Keeps the loop going until player chooses 0
+            } while (exitOption != 0);
+        }
+
+        /// <summary>
+        /// Tells the player its an invalid exit
+        /// </summary>
+        private void InvalidExit(){
+            // VIEW : Tell the player its an invalid exit
+        }
+
+        /// <summary>
+        /// Checks for the destination room and moves the player
+        /// </summary>
+        /// <param name="roomId"></param>
+        private void MovePlayer(int roomId){
+            foreach (Room room in rooms){
+                if (room.Id == roomId){
+                    player.Move(room);
+                }
             }
         }
     }
