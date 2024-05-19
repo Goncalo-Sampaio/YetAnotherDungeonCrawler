@@ -12,16 +12,25 @@ namespace YetAnotherDungeonCrawler
     /// </summary>
     public class Controller
     {
-        List<Room> rooms = new List<Room>();
-        HashSet<Enemy> enemies = new HashSet<Enemy>();
+        private IView view;
+
+        private List<Room> rooms = new List<Room>();
+        private HashSet<Enemy> enemies = new HashSet<Enemy>();
+        private Player player;
+
+
 
         /// <summary>
         /// Method to start the game. The game loop will be here.
         /// </summary>
-        public void Start()
+        public void Start(IView view)
         {
+            this.view = view;
+
             ReadEnemyFile();
             ReadRoomFile();
+
+            player = new Player("Player", 50, 20, rooms[0]);
 
             foreach (Room room in rooms)
             {
@@ -35,6 +44,61 @@ namespace YetAnotherDungeonCrawler
 
                 Console.WriteLine("------------------");
             }
+
+            int option;
+
+            do
+            {
+                // Show menu and get user option
+                option = DifferentMenu(player);
+
+                // Determine the option specified by the user and act on it
+                switch (option)
+                {
+                    case 1:
+                        //Move
+                        break;
+                    case 2:
+                        //Pick Item
+                        break;
+                    case 3:
+                        //Fight
+                        break;
+                    case 4:
+                        //Heal
+                        break;
+                    case 0:
+                        //End Game
+                        break;
+                    default:
+                        //Invalid Option
+                        break;
+                }
+
+                //After Menu message
+
+                // Keeps the loop going until player chooses 0
+            } while (option != 0);
+        }
+
+        private int DifferentMenu(Player player){
+            Enemy roomEnemy = player.CurrentRoom.Enemy;
+            IItem roomItem = player.CurrentRoom.Item;
+
+            if (roomEnemy == null && roomItem == null){
+                return view.ShowActions();
+            }
+            else if (roomEnemy == null){
+                return view.ShowActions(roomItem);
+            }
+            else if (roomItem == null){
+                return view.ShowActions(roomEnemy);
+            }
+            else {
+                return 0;
+                //return view.ShowActions(roomItem, roomEnemy);
+            }
+
         }
 
         private void ReadEnemyFile()

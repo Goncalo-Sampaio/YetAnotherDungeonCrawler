@@ -8,9 +8,9 @@ namespace YetAnotherDungeonCrawler
         {
             Controller controller = new Controller();
 
-            //IView view= new View();
+            IView view= new View(controller, null);//CHANGE THIS
 
-            controller.Start();
+            controller.Start(view);
         }
     }
 }

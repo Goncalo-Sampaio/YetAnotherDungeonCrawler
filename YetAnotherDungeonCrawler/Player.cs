@@ -14,7 +14,7 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Reference of the Room the player is currently occupying
         /// </summary>
-        private  Room currentRoom;
+        public Room CurrentRoom { get; private set; }
         /// <summary>
         /// Inventory. Uses Item as <key> with <value> being Item's quantity
         /// </summary>
@@ -30,7 +30,7 @@ namespace YetAnotherDungeonCrawler
         :base (name,health,attack)
         {
             maxHealth = health;
-            currentRoom = startingRoom;
+            CurrentRoom = startingRoom;
         }
         /// <summary>
         /// Sets Player's current Room to destination Room
@@ -38,7 +38,7 @@ namespace YetAnotherDungeonCrawler
         /// <param name="destination">Target room to move player to</param>
         public void Move(Room destination)
         {
-            currentRoom = destination;
+            CurrentRoom = destination;
         }
         /// <summary>
         /// Adds Picked up item to Player's Inventory. If Item already exists
