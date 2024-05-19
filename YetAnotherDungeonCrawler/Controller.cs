@@ -59,7 +59,7 @@ namespace YetAnotherDungeonCrawler
                         Move();
                         break;
                     case 2:
-                        //Pick Item
+                        PickItem();
                         break;
                     case 3:
                         //Fight
@@ -71,7 +71,7 @@ namespace YetAnotherDungeonCrawler
                         //End Game
                         break;
                     default:
-                        //Invalid Option
+                        InvalidOption();
                         break;
                 }
 
@@ -87,20 +87,25 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        private int DifferentMenu(Player player){
+        private int DifferentMenu(Player player)
+        {
             Enemy roomEnemy = player.CurrentRoom.Enemy;
             IItem roomItem = player.CurrentRoom.Item;
 
-            if (roomEnemy == null && roomItem == null){
+            if (roomEnemy == null && roomItem == null)
+            {
                 return view.ShowActions();
             }
-            else if (roomEnemy == null){
+            else if (roomEnemy == null)
+            {
                 return view.ShowActions(roomItem);
             }
-            else if (roomItem == null){
+            else if (roomItem == null)
+            {
                 return view.ShowActions(roomEnemy);
             }
-            else {
+            else
+            {
                 return 0;
                 //return view.ShowActions(roomItem, roomEnemy);
             }
@@ -174,13 +179,18 @@ namespace YetAnotherDungeonCrawler
             }
         }
 
-        private void Move(){
+        /// <summary>
+        /// Checks if enemy is defeated
+        /// </summary>
+        private void Move()
+        {
             Enemy roomEnemy = player.CurrentRoom.Enemy;
             int[] exits = player.CurrentRoom.Exits;
             //check if the enemy is defeated first
             //if its not, show a message and return to menu
 
-            if (roomEnemy != null){
+            if (roomEnemy != null)
+            {
                 //VIEW : tell the player he needs to defeat the enemy first
                 return;
             }
@@ -197,35 +207,47 @@ namespace YetAnotherDungeonCrawler
                 switch (exitOption)
                 {
                     case 1:
-                        if (player.CurrentRoom.Exits[0] == 0){
+                        if (player.CurrentRoom.Exits[0] == 0)
+                        {
                             InvalidExit();
                         }
-                        else {
+                        else
+                        {
                             MovePlayer(player.CurrentRoom.Exits[0]);
+                            return;
                         }
                         break;
                     case 2:
-                        if (player.CurrentRoom.Exits[1] == 0){
+                        if (player.CurrentRoom.Exits[1] == 0)
+                        {
                             InvalidExit();
                         }
-                        else {
+                        else
+                        {
                             MovePlayer(player.CurrentRoom.Exits[1]);
+                            return;
                         }
                         break;
                     case 3:
-                        if (player.CurrentRoom.Exits[2] == 0){
+                        if (player.CurrentRoom.Exits[2] == 0)
+                        {
                             InvalidExit();
                         }
-                        else {
+                        else
+                        {
                             MovePlayer(player.CurrentRoom.Exits[2]);
+                            return;
                         }
                         break;
                     case 4:
-                        if (player.CurrentRoom.Exits[3] == 0){
+                        if (player.CurrentRoom.Exits[3] == 0)
+                        {
                             InvalidExit();
                         }
-                        else {
+                        else
+                        {
                             MovePlayer(player.CurrentRoom.Exits[3]);
+                            return;
                         }
                         break;
                     case 0:
@@ -245,7 +267,8 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Tells the player its an invalid exit
         /// </summary>
-        private void InvalidExit(){
+        private void InvalidExit()
+        {
             // VIEW : Tell the player its an invalid exit
         }
 
@@ -253,12 +276,38 @@ namespace YetAnotherDungeonCrawler
         /// Checks for the destination room and moves the player
         /// </summary>
         /// <param name="roomId"></param>
-        private void MovePlayer(int roomId){
-            foreach (Room room in rooms){
-                if (room.Id == roomId){
+        private void MovePlayer(int roomId)
+        {
+            //VIEW : Player moved to room roomId
+            foreach (Room room in rooms)
+            {
+                if (room.Id == roomId)
+                {
                     player.Move(room);
                 }
             }
+        }
+
+        /// <summary>
+        /// Adds the item to the player inventory and checks if there's
+        /// an item to pick on that room
+        /// </summary>
+        private void PickItem()
+        {
+
+            if (player.CurrentRoom.Item != null){
+                player.Inventory[player.CurrentRoom.Item.Inventory] += 1;
+            }
+            else {
+                InvalidOption();
+            }
+        }
+
+        /// <summary>
+        /// Tells the player that the option picked, is invalid
+        /// </summary>
+        private void InvalidOption(){
+            //VIEW : Tell the player its an invalid option
         }
     }
 }
