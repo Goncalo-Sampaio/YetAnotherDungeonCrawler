@@ -296,7 +296,7 @@ namespace YetAnotherDungeonCrawler
         {
 
             if (player.CurrentRoom.Item != null){
-                player.Inventory[player.CurrentRoom.Item.Inventory] += 1;
+                player.Inventory[player.CurrentRoom.Item] += 1;
             }
             else {
                 InvalidOption();
