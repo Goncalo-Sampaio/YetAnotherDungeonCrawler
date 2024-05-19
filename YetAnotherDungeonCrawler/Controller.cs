@@ -17,6 +17,7 @@ namespace YetAnotherDungeonCrawler
         private List<Room> rooms = new List<Room>();
         private HashSet<Enemy> enemies = new HashSet<Enemy>();
         private Player player;
+        private HealthPotion healthPotion = new HealthPotion();
 
 
 
@@ -27,10 +28,11 @@ namespace YetAnotherDungeonCrawler
         {
             this.view = view;
 
+
             ReadEnemyFile();
             ReadRoomFile();
 
-            player = new Player("Player", 50, 20, rooms[0]);
+            player = new Player("Player", 50, 20, rooms[0], healthPotion);
 
             foreach (Room room in rooms)
             {
@@ -46,6 +48,7 @@ namespace YetAnotherDungeonCrawler
             }
 
             int option;
+            bool playerDead = false;
 
             do
             {
@@ -62,12 +65,13 @@ namespace YetAnotherDungeonCrawler
                         PickItem();
                         break;
                     case 3:
-                        //Fight
+                        playerDead = Attack();
                         break;
                     case 4:
-                        //Heal
+                        Heal();
                         break;
                     case 0:
+                        //VIEW : end game message
                         //End Game
                         break;
                     default:
@@ -78,7 +82,7 @@ namespace YetAnotherDungeonCrawler
                 //After Menu message
 
                 // Keeps the loop going until player chooses 0
-            } while (option != 0);
+            } while (option != 0 || playerDead == false);
         }
 
         /// <summary>
@@ -207,51 +211,50 @@ namespace YetAnotherDungeonCrawler
                 switch (exitOption)
                 {
                     case 1:
-                        if (player.CurrentRoom.Exits[0] == 0)
+                        if (exits[0] == 0)
                         {
                             InvalidExit();
                         }
                         else
                         {
-                            MovePlayer(player.CurrentRoom.Exits[0]);
+                            MovePlayer(exits[0]);
                             return;
                         }
                         break;
                     case 2:
-                        if (player.CurrentRoom.Exits[1] == 0)
+                        if (exits[1] == 0)
                         {
                             InvalidExit();
                         }
                         else
                         {
-                            MovePlayer(player.CurrentRoom.Exits[1]);
+                            MovePlayer(exits[1]);
                             return;
                         }
                         break;
                     case 3:
-                        if (player.CurrentRoom.Exits[2] == 0)
+                        if (exits[2] == 0)
                         {
                             InvalidExit();
                         }
                         else
                         {
-                            MovePlayer(player.CurrentRoom.Exits[2]);
+                            MovePlayer(exits[2]);
                             return;
                         }
                         break;
                     case 4:
-                        if (player.CurrentRoom.Exits[3] == 0)
+                        if (exits[3] == 0)
                         {
                             InvalidExit();
                         }
                         else
                         {
-                            MovePlayer(player.CurrentRoom.Exits[3]);
+                            MovePlayer(exits[3]);
                             return;
                         }
                         break;
                     case 0:
-                        //Back to Menu
                         break;
                     default:
                         InvalidExit();
@@ -294,12 +297,61 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         private void PickItem()
         {
-
             if (player.CurrentRoom.Item != null){
                 player.Inventory[player.CurrentRoom.Item] += 1;
             }
             else {
                 InvalidOption();
+            }
+        }
+
+        /// <summary>
+        /// Method to attack an enemy, if it exists, and get attacked by the
+        /// enemy if it is still alive
+        /// </summary>
+        /// <returns></returns>
+        private bool Attack(){
+            //Get the enemy from the current room
+            Enemy enemy = player.CurrentRoom.Enemy;
+
+            //initizaling a variable to check if player is dead
+            bool playerDead = false;
+
+            //Making sure the enemy exists
+            if (enemy != null){
+                //Attack the enemy
+                player.Attack(enemy);
+
+                //Check if enemy died and remove if from the room if it did
+                if (enemy.Health == 0){
+                    player.CurrentRoom.Enemy = null;
+                }
+                else {
+                    //------enemy attack needs to return true if player dies
+                    //check if player died after getting attacked
+                    playerDead = enemy.Attack(player);
+                }
+            }
+            else {
+                //Cant attack because there is no enemy in the room
+                InvalidOption();
+            }
+
+            return playerDead;
+        }
+
+        /// <summary>
+        /// Method to heal the player if the player has enough health potions
+        /// </summary>
+        private void Heal(){
+            //Check if the player has health potions and returns the heal value
+            if (player.Inventory[healthPotion] == 0){
+                //VIEW : Not enough items
+                return;
+            }
+            else {
+                int heal = player.Heal();
+                //VIEW : player healed heal ammount and now has player.Health
             }
         }
 
