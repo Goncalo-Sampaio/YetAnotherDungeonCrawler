@@ -9,6 +9,14 @@ namespace YetAnotherDungeonCrawler
 
         void Instructions();
 
+        void DeadMessage();
+
+        void EndMessage();
+
+        void InvalidOption();
+
+        void AfterMenu();
+
         int ShowActions();
 
         int ShowActions(IItem item);
@@ -16,8 +24,6 @@ namespace YetAnotherDungeonCrawler
         int ShowActions(Enemy enemy);
 
         int ShowActions(IItem item, Enemy enemy);
-
-        void ShowRoom(Room room);
 
         int ShowDirections(bool north, bool south, bool east, bool west);
 
@@ -30,6 +36,8 @@ namespace YetAnotherDungeonCrawler
         void Attack(int damage);
 
         void EnemyAttack(int damage);
+
+        void NotEnoughItems();
 
         void UseHealingPotion(int healing);
     }

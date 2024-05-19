@@ -30,23 +30,51 @@ namespace YetAnotherDungeonCrawler
         //Tell the Player how to play
         public void Instructions()
         {
-            Console.Write("The Dungeon is divided by Rooms, where you can find Items and/or");
+            Console.Write("\nThe Dungeon is divided by Rooms, where you can find Items and/or");
             Console.WriteLine("Enemies");
             Console.WriteLine("\n---- Warning ----");
             Console.WriteLine("You will not be able to move until the Monster is dead.");
-            Console.WriteLine("You will receive a list with couple of options.");
-            Console.WriteLine("Choose one by typing a number on the Console to Play.");
+            Console.WriteLine("\n~~ How to Play? ~~");
+            Console.WriteLine("You will receive a list with a couple of options.");
+            Console.WriteLine("Choose one by typing a number on the Console.");
             Console.WriteLine("And the most important Rule, have fun!");
+        }
+
+        //Tell the Player when they die
+        public void DeadMEssage()
+        {
+            Console.WriteLine("\nYou died...")
+        }
+
+        //Thank the Player for playing
+        public void EndMessage()
+        {
+            Console.WriteLine("\nThanks for playing our Dungeon Crawler!");
+            Console.WriteLine("Hope you had Fun!")
+        }
+
+        //General invalid option display
+        void InvalidOption()
+        {
+            Console.WriteLine("\n>>> That is not a Valid Option! <<<");
+            Console.WriteLine("Please try again...")
+        }
+
+        //
+        void AfterMenu()
+        {
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadLine();
         }
 
         //Display all available actions
         public int ShowActions()
         {
-            Console.WriteLine("Your available Actions");
+            Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine("0. Quit game\n");
-            Console.Write("Your choice: ");
+            Console.WriteLine("0. Quit game");
+            Console.Write("\nYour choice: ");
 
             return int.Parse(Console.ReadLine());
         }
@@ -54,12 +82,12 @@ namespace YetAnotherDungeonCrawler
         //Display all available actions when there is an Item
         public int ShowActions(IItem item)
         {
-            Console.WriteLine("Your available Actions");
+            Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"2. Pick up {item.Name}");
-            Console.WriteLine("0. Quit game\n");
-            Console.Write("Your choice: ");
+            Console.WriteLine("0. Quit game");
+            Console.Write("\nYour choice: ");
 
             return int.Parse(Console.ReadLine());
         }
@@ -67,12 +95,12 @@ namespace YetAnotherDungeonCrawler
         //Display all available actions when there is an Enemy
         public int ShowActions(Enemy enemy)
         {
-            Console.WriteLine("Your available Actions");
+            Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine($"2. Fight {enemy.Name}");
-            Console.WriteLine("0. Quit game\n");
-            Console.Write("Your choice: ");
+            Console.WriteLine($"3. Fight {enemy.Name}");
+            Console.WriteLine("0. Quit game");
+            Console.Write("\nYour choice: ");
 
             return int.Parse(Console.ReadLine());
         }
@@ -81,35 +109,28 @@ namespace YetAnotherDungeonCrawler
         //And an Enemy
         public int ShowActions(IItem item, Character enemy)
         {
-            Console.WriteLine("Your available Actions");
+            Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"2. Pick up {item.Name}");
             Console.WriteLine($"3. Fight {enemy.Name}");
-            Console.WriteLine("0. Quit game\n");
-            Console.Write("Your choice: ");
+            Console.WriteLine("0. Quit game");
+            Console.Write("\nYour choice: ");
 
             return int.Parse(Console.ReadLine());
-        }
-
-        //Describing Rooms and where can u more
-        public void ShowRoom(Room room)
-        {
-            Console.WriteLine("In this Room you can move:");
-            Console.WriteLine("") //room.directions?? help
         }
 
         //Display Move Action Menu
         public int ShowDirections(bool north, bool south, bool east, bool west)
         {
-            Console.WriteLine("Your Direction Actions");
-            Console.WriteLine(">-----------------------------<\n");
-            Console.WriteLine("1. Move North");
-            Console.WriteLine("2. Move South");
-            Console.WriteLine("3. Move East");
-            Console.WriteLine("4. Move West");
-            Console.WriteLine("0. Leave Move Action\n");
-            Console.Write("Your choice: ")
+            Console.WriteLine("\nYour available Direction Actions");
+            Console.WriteLine(">------------------------------<\n");
+            if (north)  {Console.WriteLine("1. Move North")}
+            if (south)  {Console.WriteLine("2. Move South")}
+            if (east)   {Console.WriteLine("3. Move East")}
+            if (west)   {Console.WriteLine("4. Move West")}
+            Console.WriteLine("0. Leave Move Action");
+            Console.Write("\nYour choice: ")
 
             return int.Parse(Console.ReadLine());
         }
@@ -117,39 +138,46 @@ namespace YetAnotherDungeonCrawler
         //Tell the Player which direction they moved
         public void MoveDirection(Direction direction)
         {
-            Console.WriteLine($"You moved {direction}.");
+            Console.WriteLine($"\nYou moved {direction}!");
         }
 
         //Tell the Player they can't move set direction
         public void NotMove(Direction direction)
         {
-            Console.WriteLine($"You can't move {direction}.");
+            Console.WriteLine
+            Console.WriteLine($"\n>>> You can't move {direction}! <<<");
+            Console.WriteLine("Please try again...")
         }
 
         //Display Player's Health
-        void ShowHealth(int health)
+        public void ShowHealth(int health)
         {
             Console.WriteLine($"You are at {health} Life.");
         }
 
         //Display when the Player attacks an Enemy
-        void Attack(int damage)
+        public void Attack(int damage)
         {
-            Console.WriteLine("You attacked the Monster.");
+            Console.WriteLine("\nYou attacked the Monster!");
             Console.WriteLine($"You dealt {damage} Damage.");
         }
 
         //Display when the Enemy attacks the Player
-        void EnemyAttack(int damage)
+        public void EnemyAttack(int damage)
         {
-            Console.WriteLine("The Monster attacked you.");
+            Console.WriteLine("\nThe Monster attacked you!");
             Console.WriteLine($"You were dealt {damage} Damage.");
         }
 
-        //Display text when Player heals
-        void UseHeal(int healing)
+        public void NotEnoughItems()
         {
-            Console.WriteLine("You used an Health Potion.");
+
+        }
+
+        //Display text when Player heals
+        public void UseHeal(int healing)
+        {
+            Console.WriteLine("\nYou used an Health Potion!");
             Console.WriteLine($"You Gained {healing} Life.");
         }
     }
