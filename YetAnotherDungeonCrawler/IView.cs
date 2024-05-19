@@ -17,14 +17,20 @@ namespace YetAnotherDungeonCrawler
 
         int ShowActions(IItem item, Enemy enemy);
 
-        int ShowDirections(Room room);
-
         void ShowRoom(Room room);
 
+        int ShowDirections(bool north, bool south, bool east, bool west);
+
         void MoveDirection(Direction direction);
+
+        void NotMove(Direction direction);
+
+        void ShowHealth(int health);
 
         void Attack(int damage);
 
         void EnemyAttack(int damage);
+
+        void UseHealingPotion(int healing);
     }
 }
