@@ -16,7 +16,7 @@ namespace YetAnotherDungeonCrawler
         private int AttackPower {get; set;}
 
         /// <summary>
-        /// Calls target's TakeDamage() method passing in "origins" AttackPower
+        /// Calls target's TakeDamage() method passing in the AttackPower
         /// </summary>
         /// <param name="target">target Character instance</param>
         public void Attack(Character target) 
@@ -24,7 +24,7 @@ namespace YetAnotherDungeonCrawler
             target.TakeDamage(AttackPower);
         }
         /// <summary>
-        /// Subtracts damage from Health. Health doesn't go bellow 0.
+        /// Subtracts damage from Health. Health doesn't go bellow 0
         /// </summary>
         /// <param name="damage">incoming damage value</param>
         public void TakeDamage(int damage)
@@ -35,6 +35,7 @@ namespace YetAnotherDungeonCrawler
             }
             else  Health =- damage;
         }
+        //Character Constructor
         public Character(string name,int health, int attack)
         {
             this.Name = name;
