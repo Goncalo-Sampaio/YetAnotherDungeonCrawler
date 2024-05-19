@@ -14,11 +14,11 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Reference of the Room the player is currently occupying
         /// </summary>
-        private  Room currentRoom;
+        public Room CurrentRoom { get; private set; }
         /// <summary>
         /// Inventory. Uses Item as <key> with <value> being Item's quantity
         /// </summary>
-        private Dictionary<Item, int> Inventory;
+        private Dictionary<IItem, int> Inventory;
         /// <summary>
         /// Player Constructor
         /// </summary>
@@ -30,7 +30,7 @@ namespace YetAnotherDungeonCrawler
         :base (name,health,attack)
         {
             maxHealth = health;
-            currentRoom = startingRoom;
+            CurrentRoom = startingRoom;
         }
         /// <summary>
         /// Sets Player's current Room to destination Room
@@ -38,20 +38,20 @@ namespace YetAnotherDungeonCrawler
         /// <param name="destination">Target room to move player to</param>
         public void Move(Room destination)
         {
-            currentRoom = destination;
+            CurrentRoom = destination;
         }
         /// <summary>
         /// Adds Picked up item to Player's Inventory. If Item already exists
         ///then increases the count
         /// </summary>
         /// <param name="item">Picked up Item</param>
-        public void PickUpItem(Item item)
+        public void PickUpItem(IItem item)
         {
             if (Inventory.ContainsKey(item)) Inventory[item] += 1; 
             else Inventory.Add(item, 1);
         }
         
-        public void Heal(Item healingPotion)
+        public void Heal()
         {
             //Healing Behavior
         }

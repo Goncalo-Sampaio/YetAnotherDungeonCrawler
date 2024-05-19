@@ -11,18 +11,18 @@ namespace YetAnotherDungeonCrawler
 
         int ShowActions();
 
-        int ShowActions(Item item);
+        int ShowActions(IItem item);
 
         int ShowActions(Enemy enemy);
 
-        int ShowActions(Item item, Enemy enemy);
+        //int ShowActions(IItem item, Enemy enemy);
 
-        int ShowDirection();
+        //int ShowDirection();
 
-        void ShowRoom();
+        //void ShowRoom();
 
-        void MoveDirection();
+        //void MoveDirection();
 
-        void EnterBattle();
+        //void EnterBattle();
     }
 }

@@ -6,7 +6,11 @@ namespace YetAnotherDungeonCrawler
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Controller controller = new Controller();
+
+            IView view= new View(controller, null);//CHANGE THIS
+
+            controller.Start(view);
         }
     }
 }
