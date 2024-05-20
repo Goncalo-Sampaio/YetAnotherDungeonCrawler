@@ -17,9 +17,6 @@ namespace YetAnotherDungeonCrawler
         private List<Room> rooms = new List<Room>();
         private HashSet<Enemy> enemies = new HashSet<Enemy>();
         private Player player;
-        private HealthPotion healthPotion = new HealthPotion();
-
-
 
         /// <summary>
         /// Method to start the game. The game loop will be here.
@@ -32,7 +29,7 @@ namespace YetAnotherDungeonCrawler
             ReadEnemyFile();
             ReadRoomFile();
 
-            player = new Player("Player", 50, 20, rooms[0], healthPotion);
+            player = new Player("Player", 50, 20, rooms[0]);
 
             foreach (Room room in rooms)
             {
@@ -329,12 +326,15 @@ namespace YetAnotherDungeonCrawler
                 else {
                     //------enemy attack needs to return true if player dies
                     //check if player died after getting attacked
-                    playerDead = enemy.Attack(player);
+                    enemy.Attack(player);
                 }
             }
             else {
                 //Cant attack because there is no enemy in the room
                 InvalidOption();
+            }
+            if (player.Health == 0){
+                playerDead = true;
             }
 
             return playerDead;
