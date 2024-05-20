@@ -21,9 +21,9 @@ namespace YetAnotherDungeonCrawler
 
         int ShowActions(IItem item);
 
-        int ShowActions(Enemy enemy);
+        int ShowActions(Character enemy);
 
-        int ShowActions(IItem item, Enemy enemy);
+        int ShowActions(IItem item, Character enemy);
 
         int ShowDirections(bool north, bool south, bool east, bool west);
 
@@ -39,7 +39,7 @@ namespace YetAnotherDungeonCrawler
 
         void EnemyAttack(int damage);
 
-        void PickUpMessage(IITem item);
+        void PickUpMessage(IItem item);
 
         void NotEnoughItems();
 

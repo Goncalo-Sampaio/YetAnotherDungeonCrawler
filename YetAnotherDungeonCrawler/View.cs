@@ -41,7 +41,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Tell the Player when they die
-        public void DeadMEssage()
+        public void DeadMessage()
         {
             Console.WriteLine("\nYou died...");
         }
@@ -54,14 +54,14 @@ namespace YetAnotherDungeonCrawler
         }
 
         //General invalid option display
-        void InvalidOption()
+        public void InvalidOption()
         {
             Console.WriteLine("\n>>> That is not a Valid Option! <<<");
             Console.WriteLine("Please try again...");
         }
 
         //
-        void AfterMenu()
+        public void AfterMenu()
         {
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadLine();
@@ -95,7 +95,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions when there is an Enemy
-        public int ShowActions(Enemy enemy)
+        public int ShowActions(Character enemy)
         {
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
@@ -129,10 +129,10 @@ namespace YetAnotherDungeonCrawler
         {
             Console.WriteLine("\nYour available Direction Actions");
             Console.WriteLine(">------------------------------<\n");
-            if (north)  {Console.WriteLine("1. Move North")}
-            if (south)  {Console.WriteLine("2. Move South")}
-            if (east)   {Console.WriteLine("3. Move East")}
-            if (west)   {Console.WriteLine("4. Move West")}
+            if (north)  {Console.WriteLine("1. Move North");}
+            if (south)  {Console.WriteLine("2. Move South");}
+            if (east)   {Console.WriteLine("3. Move East");}
+            if (west)   {Console.WriteLine("4. Move West");}
             Console.WriteLine("0. Leave Move Action");
             Console.Write("\nYour choice: ");
 
@@ -181,7 +181,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Tell the Player they picked an Item
-        void PickUpMessage(IItem item)
+        public void PickUpMessage(IItem item)
         {
             Console.WriteLine($"You picked up a {item.Name}.");
         }
