@@ -68,15 +68,14 @@ namespace YetAnotherDungeonCrawler
                         Heal();
                         break;
                     case 0:
-                        //VIEW : end game message
-                        //End Game
+                        view.EndMessage();
                         break;
                     default:
                         InvalidOption();
                         break;
                 }
 
-                //After Menu message
+                view.AfterMenu();
 
                 // Keeps the loop going until player chooses 0
             } while (option != 0 || playerDead == false);
@@ -107,8 +106,7 @@ namespace YetAnotherDungeonCrawler
             }
             else
             {
-                return 0;
-                //return view.ShowActions(roomItem, roomEnemy);
+                return view.ShowActions(roomItem, roomEnemy);
             }
         }
 
@@ -187,12 +185,17 @@ namespace YetAnotherDungeonCrawler
         {
             Enemy roomEnemy = player.CurrentRoom.Enemy;
             int[] exits = player.CurrentRoom.Exits;
+            bool north;
+            bool south;
+            bool west;
+            bool east;
+            (north, south, west, east) = GetAvailableExits(exits);
+
             //check if the enemy is defeated first
             //if its not, show a message and return to menu
-
             if (roomEnemy != null)
             {
-                //VIEW : tell the player he needs to defeat the enemy first
+                view.AttackBeforeMove();
                 return;
             }
 
@@ -200,8 +203,7 @@ namespace YetAnotherDungeonCrawler
 
             do
             {
-                // VIEW :
-                //Shows the player the available exits and asks for input
+                view.ShowDirections(north, south, west, east);
                 exitOption = int.Parse(Console.ReadLine());
 
                 // Determine the option specified by the user and act on it
@@ -258,10 +260,31 @@ namespace YetAnotherDungeonCrawler
                         break;
                 }
 
-                //After Menu message
+                view.AfterMenu();
 
                 // Keeps the loop going until player chooses 0
             } while (exitOption != 0);
+        }
+
+        private (bool, bool, bool, bool) GetAvailableExits(int[] exits){
+            bool north = false;
+            bool south = false;
+            bool west = false;
+            bool east = false;
+            if (exits[0] == 0){
+                north = true;
+            }
+            else if (exits[1] == 0){
+                south = true;
+            }
+            else if (exits[2] == 0){
+                west = true;
+            }
+            else if (exits[3] == 0){
+                east = true;
+            }
+
+            return (north, south, west, east);
         }
 
         /// <summary>
@@ -294,9 +317,10 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         private void PickItem()
         {
+            //Checks if there is an item to pick
             if (player.CurrentRoom.Item != null)
             {
-                player.Inventory[player.CurrentRoom.Item] += 1;
+                player.PickUpItem(player.CurrentRoom.Item);
             }
             else
             {
@@ -343,6 +367,7 @@ namespace YetAnotherDungeonCrawler
             if (player.Health == 0)
             {
                 playerDead = true;
+                view.DeadMessage();
             }
 
             return playerDead;
