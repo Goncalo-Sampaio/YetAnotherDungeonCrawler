@@ -24,7 +24,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("Welcome to Yet Another Dungeon Crawler!");
             Console.WriteLine(">-------------------------------------<\n");
             Console.Write("You are in a Dungeon, explore it and ");
-            Console.WriteLine("defeat the Boss to win the Game!")
+            Console.WriteLine("defeat the Boss to win the Game!");
         }
 
         //Tell the Player how to play
@@ -43,21 +43,21 @@ namespace YetAnotherDungeonCrawler
         //Tell the Player when they die
         public void DeadMEssage()
         {
-            Console.WriteLine("\nYou died...")
+            Console.WriteLine("\nYou died...");
         }
 
         //Thank the Player for playing
         public void EndMessage()
         {
             Console.WriteLine("\nThanks for playing our Dungeon Crawler!");
-            Console.WriteLine("Hope you had Fun!")
+            Console.WriteLine("Hope you had Fun!");
         }
 
         //General invalid option display
         void InvalidOption()
         {
             Console.WriteLine("\n>>> That is not a Valid Option! <<<");
-            Console.WriteLine("Please try again...")
+            Console.WriteLine("Please try again...");
         }
 
         //
@@ -73,6 +73,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
+            Console.WriteLine("4. Heal");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -86,6 +87,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"2. Pick up {item.Name}");
+            Console.WriteLine("4. Heal");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -99,6 +101,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"3. Fight {enemy.Name}");
+            Console.WriteLine("4. Heal");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -114,6 +117,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("1. Move");
             Console.WriteLine($"2. Pick up {item.Name}");
             Console.WriteLine($"3. Fight {enemy.Name}");
+            Console.WriteLine("4. Heal");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -130,7 +134,7 @@ namespace YetAnotherDungeonCrawler
             if (east)   {Console.WriteLine("3. Move East")}
             if (west)   {Console.WriteLine("4. Move West")}
             Console.WriteLine("0. Leave Move Action");
-            Console.Write("\nYour choice: ")
+            Console.Write("\nYour choice: ");
 
             return int.Parse(Console.ReadLine());
         }
@@ -144,15 +148,17 @@ namespace YetAnotherDungeonCrawler
         //Tell the Player they can't move set direction
         public void NotMove(Direction direction)
         {
-            Console.WriteLine
             Console.WriteLine($"\n>>> You can't move {direction}! <<<");
-            Console.WriteLine("Please try again...")
+            Console.WriteLine("Please try again...");
         }
 
         //Remind the Player they can't move before killing the Enemy
         public void AttackBeforeMove()
         {
-            
+            Console.Write("\n>>> You can't move before defeating the ");
+            Console.WriteLine("Monster <<<");
+            Console.Write("Please try again, after defeating the ");
+            Console.WriteLine("Monster...");
         }
 
         //Display Player's Health
@@ -192,7 +198,7 @@ namespace YetAnotherDungeonCrawler
         public void UseHeal(int healing)
         {
             Console.WriteLine("\nYou used an Health Potion!");
-            Console.WriteLine($"You Gained {healing} Life.");
+            Console.WriteLine($"You gained {healing} Life.");
         }
     }
 }
