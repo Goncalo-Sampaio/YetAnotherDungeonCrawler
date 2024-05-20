@@ -277,11 +277,11 @@ namespace YetAnotherDungeonCrawler
             else if (exits[1] == 0){
                 south = true;
             }
-            else if (exits[1] == 0){
-                south = true;
+            else if (exits[2] == 0){
+                west = true;
             }
-            else if (exits[1] == 0){
-                south = true;
+            else if (exits[3] == 0){
+                east = true;
             }
 
             return (north, south, west, east);
