@@ -294,9 +294,10 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         private void PickItem()
         {
+            //Checks if there is an item to pick
             if (player.CurrentRoom.Item != null)
             {
-                player.Inventory[player.CurrentRoom.Item] += 1;
+                player.PickUpItem(player.CurrentRoom.Item);
             }
             else
             {
