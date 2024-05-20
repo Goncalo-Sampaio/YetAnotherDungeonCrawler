@@ -17,7 +17,7 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Enemy in Room. If none then Enemy == null
         /// </summary>
-        public Enemy Enemy { get;}
+        public Enemy Enemy { get; set; }
         /// <summary>
         /// Item in Room. If none then Item == null
         /// </summary>

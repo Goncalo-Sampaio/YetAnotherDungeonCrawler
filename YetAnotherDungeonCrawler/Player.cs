@@ -11,6 +11,7 @@ namespace YetAnotherDungeonCrawler
     public class Player : Character
     {
         private readonly int maxHealth;
+        private HealthPotion hpotion = new HealthPotion();
         /// <summary>
         /// Reference of the Room the player is currently occupying
         /// </summary>
@@ -31,6 +32,11 @@ namespace YetAnotherDungeonCrawler
         {
             maxHealth = health;
             CurrentRoom = startingRoom;
+            //By default add a dedicated slot for health potion:            
+            Inventory = new Dictionary<IItem, int>();
+            
+            Inventory[hpotion] = 0;
+
         }
         /// <summary>
         /// Sets Player's current Room to destination Room
@@ -53,7 +59,21 @@ namespace YetAnotherDungeonCrawler
         
         public void Heal()
         {
-            //Healing Behavior
+            
+            //Check if item of type healinpotion exists in inventory:
+            if (Inventory[hpotion] > 0)
+            {
+                //Remove item from inventory
+                Inventory[hpotion] -= 1;
+                //Heal Player
+                int heal = Health + hpotion.Use();
+                if (heal > maxHealth)
+                {
+                    Health = maxHealth;
+                }
+                else Health = heal;
+            }           
+            
         }
     }
 }
