@@ -157,7 +157,7 @@ namespace YetAnotherDungeonCrawler
         {
             Console.Write("\n>>> You can't move before defeating the ");
             Console.WriteLine("Monster <<<");
-            Console.Write("Please try again, after killing...");
+            Console.Write("Please try again, after killing it...");
         }
 
         //Display Player's Health
