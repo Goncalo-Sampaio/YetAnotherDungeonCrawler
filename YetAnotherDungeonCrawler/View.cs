@@ -181,7 +181,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Tell the Player they picked an Item
-        void PickUpMessage(IITem item)
+        void PickUpMessage(IItem item)
         {
             Console.WriteLine($"You picked up a {item.Name}.");
         }
@@ -190,7 +190,7 @@ namespace YetAnotherDungeonCrawler
         public void NotEnoughItems()
         {
             Console.WriteLine("\n>>> You don't have enough Items <<<");
-            COnsole.WriteLine("Please try again when you have an Item...");
+            Console.WriteLine("Please try again when you have an Item...");
         }
 
         //Display text when Player heals
