@@ -210,51 +210,51 @@ namespace YetAnotherDungeonCrawler
                     case 1:
                         if (exits[0] == 0)
                         {
-                            InvalidExit();
+                            InvalidExit(Direction.North);
                         }
                         else
                         {
-                            MovePlayer(exits[0]);
+                            MovePlayer(exits[0], Direction.North);
                             return;
                         }
                         break;
                     case 2:
                         if (exits[1] == 0)
                         {
-                            InvalidExit();
+                            InvalidExit(Direction.South);
                         }
                         else
                         {
-                            MovePlayer(exits[1]);
+                            MovePlayer(exits[1], Direction.South);
                             return;
                         }
                         break;
                     case 3:
                         if (exits[2] == 0)
                         {
-                            InvalidExit();
+                            InvalidExit(Direction.West);
                         }
                         else
                         {
-                            MovePlayer(exits[2]);
+                            MovePlayer(exits[2], Direction.West);
                             return;
                         }
                         break;
                     case 4:
                         if (exits[3] == 0)
                         {
-                            InvalidExit();
+                            InvalidExit(Direction.East);
                         }
                         else
                         {
-                            MovePlayer(exits[3]);
+                            MovePlayer(exits[3], Direction.East);
                             return;
                         }
                         break;
                     case 0:
                         break;
                     default:
-                        InvalidExit();
+                        InvalidOption();
                         break;
                 }
 
@@ -267,18 +267,18 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Tells the player its an invalid exit
         /// </summary>
-        private void InvalidExit()
+        private void InvalidExit(Direction direction)
         {
-            // VIEW : Tell the player its an invalid exit
+            view.NotMove(direction);
         }
 
         /// <summary>
         /// Checks for the destination room and moves the player
         /// </summary>
         /// <param name="roomId"></param>
-        private void MovePlayer(int roomId)
+        private void MovePlayer(int roomId, Direction direction)
         {
-            //VIEW : Player moved to room roomId
+            view.MoveDirection(direction);
             foreach (Room room in rooms)
             {
                 if (room.Id == roomId)
@@ -294,10 +294,12 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         private void PickItem()
         {
-            if (player.CurrentRoom.Item != null){
+            if (player.CurrentRoom.Item != null)
+            {
                 player.Inventory[player.CurrentRoom.Item] += 1;
             }
-            else {
+            else
+            {
                 InvalidOption();
             }
         }
@@ -307,7 +309,8 @@ namespace YetAnotherDungeonCrawler
         /// enemy if it is still alive
         /// </summary>
         /// <returns></returns>
-        private bool Attack(){
+        private bool Attack()
+        {
             //Get the enemy from the current room
             Enemy enemy = player.CurrentRoom.Enemy;
 
@@ -315,25 +318,30 @@ namespace YetAnotherDungeonCrawler
             bool playerDead = false;
 
             //Making sure the enemy exists
-            if (enemy != null){
+            if (enemy != null)
+            {
                 //Attack the enemy
                 player.Attack(enemy);
 
                 //Check if enemy died and remove if from the room if it did
-                if (enemy.Health == 0){
+                if (enemy.Health == 0)
+                {
                     player.CurrentRoom.Enemy = null;
                 }
-                else {
+                else
+                {
                     //------enemy attack needs to return true if player dies
                     //check if player died after getting attacked
                     enemy.Attack(player);
                 }
             }
-            else {
+            else
+            {
                 //Cant attack because there is no enemy in the room
                 InvalidOption();
             }
-            if (player.Health == 0){
+            if (player.Health == 0)
+            {
                 playerDead = true;
             }
 
@@ -341,25 +349,28 @@ namespace YetAnotherDungeonCrawler
         }
 
         /// <summary>
-        /// Method to heal the player if the player has enough health potions
+        /// Method that calls player's Heal method that return a bool depending
+        /// on if there was enough potions to heal or not
         /// </summary>
-        private void Heal(){
-            //Check if the player has health potions and returns the heal value
-            if (player.Inventory[healthPotion] == 0){
-                //VIEW : Not enough items
-                return;
+        private void Heal()
+        {
+            bool heal = player.Heal();
+            if (heal)
+            {
+                view.UseHeal(player.Health);
             }
-            else {
-                int heal = player.Heal();
-                //VIEW : player healed heal ammount and now has player.Health
+            else
+            {
+                view.NotEnoughItems();
             }
         }
 
         /// <summary>
         /// Tells the player that the option picked, is invalid
         /// </summary>
-        private void InvalidOption(){
-            //VIEW : Tell the player its an invalid option
+        private void InvalidOption()
+        {
+            view.InvalidOption();
         }
     }
 }

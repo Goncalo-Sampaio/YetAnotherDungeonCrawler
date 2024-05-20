@@ -27,14 +27,14 @@ namespace YetAnotherDungeonCrawler
         /// <param name="health">Player Health</param>
         /// <param name="attack">Player Attack</param>
         /// <param name="startingRoom">Player's starting Room</param>
-        public Player(string name,int health, int attack,Room startingRoom) 
-        :base (name,health,attack)
+        public Player(string name, int health, int attack, Room startingRoom)
+        : base(name, health, attack)
         {
             maxHealth = health;
             CurrentRoom = startingRoom;
             //By default add a dedicated slot for health potion:            
             Inventory = new Dictionary<IItem, int>();
-            
+
             Inventory[hpotion] = 0;
 
         }
@@ -53,13 +53,12 @@ namespace YetAnotherDungeonCrawler
         /// <param name="item">Picked up Item</param>
         public void PickUpItem(IItem item)
         {
-            if (Inventory.ContainsKey(item)) Inventory[item] += 1; 
+            if (Inventory.ContainsKey(item)) Inventory[item] += 1;
             else Inventory.Add(item, 1);
         }
-        
-        public void Heal()
+
+        public bool Heal()
         {
-            
             //Check if item of type healinpotion exists in inventory:
             if (Inventory[hpotion] > 0)
             {
@@ -72,8 +71,10 @@ namespace YetAnotherDungeonCrawler
                     Health = maxHealth;
                 }
                 else Health = heal;
-            }           
-            
+                return true;
+            }
+
+            return false;
         }
     }
 }
