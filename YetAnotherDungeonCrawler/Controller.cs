@@ -203,8 +203,11 @@ namespace YetAnotherDungeonCrawler
 
             do
             {
-                view.ShowDirections(north, south, west, east);
-                exitOption = int.Parse(Console.ReadLine());
+                foreach(int i in exits){
+                    Console.WriteLine(i);
+                }
+
+                exitOption = view.ShowDirections(north, south, west, east);
 
                 // Determine the option specified by the user and act on it
                 switch (exitOption)
@@ -267,21 +270,25 @@ namespace YetAnotherDungeonCrawler
         }
 
         private (bool, bool, bool, bool) GetAvailableExits(int[] exits){
-            bool north = false;
-            bool south = false;
-            bool west = false;
-            bool east = false;
+            bool north = true;
+            bool south = true;
+            bool west = true;
+            bool east = true;
+
             if (exits[0] == 0){
-                north = true;
+                north = false;
             }
-            else if (exits[1] == 0){
-                south = true;
+
+            if (exits[1] == 0){
+                south = false;
             }
-            else if (exits[2] == 0){
-                west = true;
+
+            if (exits[2] == 0){
+                west = false;
             }
-            else if (exits[3] == 0){
-                east = true;
+
+            if (exits[3] == 0){
+                east = false;
             }
 
             return (north, south, west, east);
