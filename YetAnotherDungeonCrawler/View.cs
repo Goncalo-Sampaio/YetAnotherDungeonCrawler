@@ -180,6 +180,13 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine($"You were dealt {damage} Damage.");
         }
 
+        //Tell the Player the Enemy is dead
+        public void EnemyDead()
+        {
+            Console.WriteLine("\nThe Monster died!");
+            Console.WriteLine("Good Job!");
+        }
+
         //Tell the Player they picked an Item
         public void PickUpMessage(IItem item)
         {

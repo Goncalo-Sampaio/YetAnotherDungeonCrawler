@@ -39,6 +39,8 @@ namespace YetAnotherDungeonCrawler
 
         void EnemyAttack(int damage);
 
+        void EnemyDead();
+
         void PickUpMessage(IItem item);
 
         void NotEnoughItems();
