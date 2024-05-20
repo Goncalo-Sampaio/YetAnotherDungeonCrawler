@@ -31,11 +31,15 @@ namespace YetAnotherDungeonCrawler
 
         void NotMove(Direction direction);
 
+        void AttackBeforeMove();
+
         void ShowHealth(int health);
 
         void Attack(int damage);
 
         void EnemyAttack(int damage);
+
+        void PickUpMessage(IITem item);
 
         void NotEnoughItems();
 

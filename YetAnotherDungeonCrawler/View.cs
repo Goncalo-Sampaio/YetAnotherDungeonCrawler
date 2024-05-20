@@ -149,6 +149,12 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("Please try again...")
         }
 
+        //Remind the Player they can't move before killing the Enemy
+        public void AttackBeforeMove()
+        {
+            
+        }
+
         //Display Player's Health
         public void ShowHealth(int health)
         {
@@ -169,9 +175,17 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine($"You were dealt {damage} Damage.");
         }
 
+        //Tell the Player they picked an Item
+        void PickUpMessage(IITem item)
+        {
+            Console.WriteLine($"You picked up a {item.Name}.");
+        }
+
+        //Tell the PLayer they don't have enough Items
         public void NotEnoughItems()
         {
-
+            Console.WriteLine("\n>>> You don't have enough Items <<<");
+            COnsole.WriteLine("Please try again when you have an Item...");
         }
 
         //Display text when Player heals
