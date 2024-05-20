@@ -73,7 +73,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
-            Console.WriteLine("4. Heal");
+            Console.WriteLine("4. Use Item");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -87,7 +87,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"2. Pick up {item.Name}");
-            Console.WriteLine("4. Heal");
+            Console.WriteLine("4. Use Item");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -101,7 +101,7 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"3. Fight {enemy.Name}");
-            Console.WriteLine("4. Heal");
+            Console.WriteLine("4. Use Item");
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -157,14 +157,13 @@ namespace YetAnotherDungeonCrawler
         {
             Console.Write("\n>>> You can't move before defeating the ");
             Console.WriteLine("Monster <<<");
-            Console.Write("Please try again, after defeating the ");
-            Console.WriteLine("Monster...");
+            Console.Write("Please try again, after killing...");
         }
 
         //Display Player's Health
         public void ShowHealth(int health)
         {
-            Console.WriteLine($"You are at {health} Life.");
+            Console.WriteLine($"You are at {health} Life now.");
         }
 
         //Display when the Player attacks an Enemy
@@ -195,10 +194,10 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display text when Player heals
-        public void UseHeal(int healing)
+        public void UseHeal(int health)
         {
             Console.WriteLine("\nYou used an Health Potion!");
-            Console.WriteLine($"You gained {healing} Life.");
+            ShowHealth(health);
         }
     }
 }

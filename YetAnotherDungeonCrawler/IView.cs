@@ -43,6 +43,6 @@ namespace YetAnotherDungeonCrawler
 
         void NotEnoughItems();
 
-        void UseHealingPotion(int healing);
+        void UseHeal(int health);
     }
 }
