@@ -39,7 +39,7 @@ namespace YetAnotherDungeonCrawler
 
         void EnemyAttack(int damage);
 
-        void PickUpMessage(IITem item);
+        void PickUpMessage(IItem item);
 
         void NotEnoughItems();
 
