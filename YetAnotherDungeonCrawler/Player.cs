@@ -11,7 +11,7 @@ namespace YetAnotherDungeonCrawler
     public class Player : Character
     {
         private readonly int maxHealth;
-        private HealthPotion hpotion = new HealthPotion();
+        
         /// <summary>
         /// Reference of the Room the player is currently occupying
         /// </summary>
@@ -19,7 +19,7 @@ namespace YetAnotherDungeonCrawler
         /// <summary>
         /// Inventory. Uses Item as <key> with <value> being Item's quantity
         /// </summary>
-        public Dictionary<IItem, int> Inventory { get; set; }
+        public Dictionary<string, int> Inventory { get; set; }
         /// <summary>
         /// Player Constructor
         /// </summary>
@@ -31,11 +31,10 @@ namespace YetAnotherDungeonCrawler
         : base(name, health, attack)
         {
             maxHealth = health;
-            CurrentRoom = startingRoom;
-            //By default add a dedicated slot for health potion:            
-            Inventory = new Dictionary<IItem, int>();
-
-            Inventory[hpotion] = 0;
+            CurrentRoom = startingRoom;                      
+            Inventory = new Dictionary<string, int>();
+            //Seed Inventory items set to 0:
+            Inventory["HealthPotion"] = 0;           
 
         }
         /// <summary>
@@ -52,19 +51,19 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         /// <param name="item">Picked up Item</param>
         public void PickUpItem(IItem item)
-        {
-            if (Inventory.ContainsKey(item)) Inventory[item] += 1;
-            else Inventory.Add(item, 1);
+        {            
+            if (Inventory.ContainsKey(item.Name)) Inventory[item.Name] += 1;   
         }
 
         public bool Heal()
         {
             //Check if item of type healinpotion exists in inventory:
-            if (Inventory[hpotion] > 0)
+            if (Inventory["HealthPotion"] > 0)
             {
                 //Remove item from inventory
-                Inventory[hpotion] -= 1;
+                Inventory["HealthPotion"] -= 1;
                 //Heal Player
+                HealthPotion hpotion = new HealthPotion();
                 int heal = Health + hpotion.Use();
                 if (heal > maxHealth)
                 {
