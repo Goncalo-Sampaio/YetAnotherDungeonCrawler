@@ -10,10 +10,11 @@ namespace YetAnotherDungeonCrawler
     /// </summary>
     public class HealthPotion : IItem
     {
-        public string Name {get; set;} = "HealthPotion";
-        public void Use(Character player) 
+        public string Name {get; set;} = "HealthPotion";        
+        public int Use() 
         {
             //player.Health += 10;
+            return 20;
         }
     }
 }
