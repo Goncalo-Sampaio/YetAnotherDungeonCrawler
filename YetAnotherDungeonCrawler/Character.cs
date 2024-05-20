@@ -12,7 +12,7 @@ namespace YetAnotherDungeonCrawler
     {
         //Instance variables
         public string Name {get;}
-        private int Health {get; set;}        
+        public int Health {get; protected set;}        
         private int AttackPower {get; set;}
 
         /// <summary>
