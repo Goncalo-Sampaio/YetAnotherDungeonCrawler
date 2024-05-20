@@ -155,8 +155,10 @@ namespace YetAnotherDungeonCrawler
                 }
 
                 IItem roomItem = null;
+                Console.WriteLine(item);
                 if (item == "HealthPotion")
                 {
+                    Console.WriteLine("Entrou yummy");
                     roomItem = new HealthPotion();
                 }
 
@@ -328,6 +330,7 @@ namespace YetAnotherDungeonCrawler
             if (player.CurrentRoom.Item != null)
             {
                 player.PickUpItem(player.CurrentRoom.Item);
+                player.CurrentRoom.ItemPickup();
             }
             else
             {
@@ -352,29 +355,30 @@ namespace YetAnotherDungeonCrawler
             if (enemy != null)
             {
                 //Attack the enemy
+                view.Attack(player.AttackPower);
                 player.Attack(enemy);
 
                 //Check if enemy died and remove if from the room if it did
                 if (enemy.Health == 0)
                 {
+
                     player.CurrentRoom.Enemy = null;
                 }
                 else
                 {
-                    //------enemy attack needs to return true if player dies
-                    //check if player died after getting attacked
+                    view.EnemyAttack(enemy.AttackPower);
                     enemy.Attack(player);
+                }
+
+                if (player.Health == 0)
+                {
+                    playerDead = true;
+                    view.DeadMessage();
                 }
             }
             else
             {
-                //Cant attack because there is no enemy in the room
                 InvalidOption();
-            }
-            if (player.Health == 0)
-            {
-                playerDead = true;
-                view.DeadMessage();
             }
 
             return playerDead;

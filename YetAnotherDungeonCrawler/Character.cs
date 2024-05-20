@@ -13,7 +13,7 @@ namespace YetAnotherDungeonCrawler
         //Instance variables
         public string Name {get;}
         public int Health {get; protected set;}        
-        private int AttackPower {get; set;}
+        public int AttackPower {get;}
 
         /// <summary>
         /// Calls target's TakeDamage() method passing in the AttackPower

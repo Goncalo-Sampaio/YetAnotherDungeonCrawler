@@ -52,7 +52,7 @@ namespace YetAnotherDungeonCrawler
         /// <param name="item">Picked up Item</param>
         public void PickUpItem(IItem item)
         {            
-            if (Inventory.ContainsKey(item.Name)) Inventory[item.Name] += 1;   
+            if (Inventory.ContainsKey(item.Name)) Inventory[item.Name] += 1;  
         }
 
         public bool Heal()
