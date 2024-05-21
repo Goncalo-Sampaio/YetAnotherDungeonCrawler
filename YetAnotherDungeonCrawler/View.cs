@@ -131,8 +131,8 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">------------------------------<\n");
             if (north)  {Console.WriteLine("1. Move North");}
             if (south)  {Console.WriteLine("2. Move South");}
-            if (east)   {Console.WriteLine("3. Move West");}
-            if (west)   {Console.WriteLine("4. Move East");}
+            if (west)   {Console.WriteLine("3. Move West");}
+            if (east)   {Console.WriteLine("4. Move East");}
             Console.WriteLine("0. Leave Move Action");
             Console.Write("\nYour choice: ");
 
