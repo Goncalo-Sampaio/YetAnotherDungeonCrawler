@@ -150,7 +150,7 @@ namespace YetAnotherDungeonCrawler
                 {
                     if (enemyName == enemy.Name)
                     {
-                        roomEnemy = enemy;
+                        roomEnemy = Enemy.Clone(enemy);
                     }
                 }
 
@@ -264,8 +264,6 @@ namespace YetAnotherDungeonCrawler
                         InvalidOption();
                         break;
                 }
-
-                view.AfterMenu();
 
                 // Keeps the loop going until player chooses 0
             } while (exitOption != 0);
