@@ -78,7 +78,7 @@ namespace YetAnotherDungeonCrawler
                 view.AfterMenu();
 
                 // Keeps the loop going until player chooses 0
-            } while (option != 0 || playerDead == false);
+            } while (option != 0 && playerDead == false);
         }
 
         /// <summary>
@@ -357,17 +357,19 @@ namespace YetAnotherDungeonCrawler
                 //Attack the enemy
                 view.Attack(player.AttackPower);
                 player.Attack(enemy);
+                Console.WriteLine(player.Health);
 
                 //Check if enemy died and remove if from the room if it did
                 if (enemy.Health == 0)
                 {
-
                     player.CurrentRoom.Enemy = null;
                 }
                 else
                 {
                     view.EnemyAttack(enemy.AttackPower);
+                    Console.WriteLine(player.Health);
                     enemy.Attack(player);
+                    Console.WriteLine(player.Health);
                 }
 
                 if (player.Health == 0)

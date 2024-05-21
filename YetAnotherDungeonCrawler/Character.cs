@@ -33,7 +33,10 @@ namespace YetAnotherDungeonCrawler
             {
                 Health = 0;
             }
-            else  Health =- damage;
+            else 
+            {
+                Health -= damage;
+            }
         }
         //Character Constructor
         public Character(string name,int health, int attack)
