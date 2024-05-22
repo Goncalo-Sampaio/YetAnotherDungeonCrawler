@@ -103,8 +103,10 @@ namespace YetAnotherDungeonCrawler
         private void ReadEnemyFile()
         {
             string s;
+            char sep = Path.DirectorySeparatorChar;
             using StreamReader r =
-                new StreamReader("./YetAnotherDungeonCrawler/Enemies.txt");
+                new StreamReader
+                ($".{sep}YetAnotherDungeonCrawler{sep}Enemies.txt");
 
             while ((s = r.ReadLine()) != null)
             {
@@ -127,8 +129,10 @@ namespace YetAnotherDungeonCrawler
         private void ReadRoomFile()
         {
             string s;
+            char sep = Path.DirectorySeparatorChar;
             using StreamReader r =
-                new StreamReader("./YetAnotherDungeonCrawler/Rooms.txt");
+                new StreamReader
+                ($".{sep}YetAnotherDungeonCrawler{sep}Rooms.txt");
 
             while ((s = r.ReadLine()) != null)
             {
