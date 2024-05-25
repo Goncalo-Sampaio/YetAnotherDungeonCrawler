@@ -45,9 +45,6 @@ namespace YetAnotherDungeonCrawler
 
         void NotEnoughItems();
 
-        void UseHeal(int health);
-        void ShowPlayerState(Player player);
-        void ShowEnemyState(Character roomEnemy);
-        
+        void UseHeal(int health);       
     }
 }

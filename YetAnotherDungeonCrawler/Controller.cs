@@ -28,7 +28,7 @@ namespace YetAnotherDungeonCrawler
             ReadEnemyFile();
             ReadRoomFile();
 
-            player = new Player("Player", 50, 20, rooms[0]);
+            player = new Player("Player", 100, 20, rooms[0]);
 
             int option;
             bool playerDead = false;
