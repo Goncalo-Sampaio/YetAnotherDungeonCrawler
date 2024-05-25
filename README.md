@@ -26,11 +26,12 @@
 **Git Repository:** [GitHub] (https://github.com/Goncalo-Sampaio/YetAnotherDungeonCrawler.git)
 
 ---
-### **Solution Architecture:**
+## **Solution Architecture:**
 
 **CONTROLLER CLASSES HERE!**
 
 #### **Model Classes:**
+
 - **Character.cs:**
   - Contains the components and logic that needs to be shared between *Player* and *Enemy*. Mainly *Name*, *Health* and *AttackPower*.
   - Has methods that:
@@ -58,7 +59,6 @@
   - Implements *IItem*.
   - **"Use()"** - returns a health value for the Player to Heal.
 
-
 - **Direction.cs:**
   - Enum that holds the 4 Compass directions.
 
@@ -67,3 +67,23 @@
   - **"Id"** property used to identify Room instances more easily.
   - **"Exit"** - Array that stores room Ids. The index of the Id value determines that room's relative direction.
   - **"ItemPickup()"** - If called, removes the Item from that Room.
+
+#### **View:**
+
+- **IView.cs:**
+  - Interface implemented by View.
+
+- **View.cs:**
+  - Implements IView.
+  - Passes in data from *Controller* and prints text to Console.
+---
+
+### **Flowchart:**
+
+```mermaid
+
+```
+---
+
+### **References:**
+---
