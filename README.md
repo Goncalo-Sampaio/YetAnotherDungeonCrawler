@@ -11,7 +11,7 @@
 **Eduardo Rocha:**
  - Model Classes
  - ReadMe
- - Mermaid flowchart
+ - Class Diagram
 
 **Gonçalo Sampaio:**
  - Repository setup
@@ -78,12 +78,34 @@
   - Passes in data from *Controller* and prints text to Console.
 ---
 
-### **Flowchart:**
+### **Class Diagram:**
 
 ```mermaid
 
+classDiagram
+
+Character <|-- Enemy
+Character <|-- Player
+
+
+UglyView o-- Player
+CompareByName ..|> IComparer
+CompareByName ..> Player
+Controller o-- Player
+Controller --> CompareByName
+Controller --> IView
+Controller --> IComparer
+Controller ..> PlayerOrder
+Player ..|> IComparable
+Program o-- Player
+Program --> Controller
+Program --> UglyView
+
+<<interface>>IComparer
+<<interface>>IComparable
+<<interface>>IView
+
 ```
----
 
 ### **References:**
 ---
