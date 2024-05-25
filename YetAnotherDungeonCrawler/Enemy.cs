@@ -17,6 +17,12 @@ namespace YetAnotherDungeonCrawler
             
         }
         
+        /// <summary>
+        /// Takes an enemy instance and creates a new one with the same~
+        /// variables
+        /// </summary>
+        /// <param name="enemy"></param>
+        /// <returns></returns>
         public static Enemy Clone(Enemy enemy){
             Enemy clone = new Enemy (enemy.Name, enemy.Health, enemy.AttackPower);
             return clone;
