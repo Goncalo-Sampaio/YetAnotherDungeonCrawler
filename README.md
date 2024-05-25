@@ -138,6 +138,8 @@ Program --> IView
 <<interface>>IView
 
 ```
+### **Dungeon Map:**
+![DungeonMap](DungeonMap.png)
 
 ### **References:**
 
