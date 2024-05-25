@@ -25,24 +25,10 @@ namespace YetAnotherDungeonCrawler
         {
             this.view = view;
 
-
             ReadEnemyFile();
             ReadRoomFile();
 
             player = new Player("Player", 50, 20, rooms[0]);
-
-            foreach (Room room in rooms)
-            {
-                Console.WriteLine(room.Id);
-                Console.WriteLine(room.Enemy);
-                Console.WriteLine(room.Item);
-                foreach (int i in room.Exits)
-                {
-                    Console.WriteLine(i);
-                }
-
-                Console.WriteLine("------------------");
-            }
 
             int option;
             bool playerDead = false;
@@ -78,7 +64,7 @@ namespace YetAnotherDungeonCrawler
                 view.AfterMenu();
 
                 // Keeps the loop going until player chooses 0
-            } while (option != 0 || playerDead == false);
+            } while (option != 0 && playerDead == false);
         }
 
         /// <summary>
@@ -110,12 +96,18 @@ namespace YetAnotherDungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Method to read the provided enemy file line by line
+        /// Will split the input to get each variable for the enemy
+        /// </summary>
         private void ReadEnemyFile()
         {
             //Change this to relative path.
             string s;
+            char sep = Path.DirectorySeparatorChar;
             using StreamReader r =
-                new StreamReader("./YetAnotherDungeonCrawler/Enemies.txt");
+                new StreamReader
+                ($".{sep}YetAnotherDungeonCrawler{sep}Enemies.txt");
 
             while ((s = r.ReadLine()) != null)
             {
@@ -124,19 +116,28 @@ namespace YetAnotherDungeonCrawler
                 int enemyHealth = int.Parse(enemySpecs[1]);
                 int enemyAttack = int.Parse(enemySpecs[2]);
 
+                //Creates a new enemy using the file's information and
+                // adds it to the enemy HashSet
                 Enemy enemy = new Enemy(enemyName, enemyHealth, enemyAttack);
                 enemies.Add(enemy);
             }
         }
 
+        /// <summary>
+        /// Method to read the provided room file to create each room
+        /// according to each line in the file.
+        /// </summary>
         private void ReadRoomFile()
         {
             string s;
+            char sep = Path.DirectorySeparatorChar;
             using StreamReader r =
-                new StreamReader("./YetAnotherDungeonCrawler/Rooms.txt");
+                new StreamReader
+                ($".{sep}YetAnotherDungeonCrawler{sep}Rooms.txt");
 
             while ((s = r.ReadLine()) != null)
             {
+                //Split each line into the necessary variables for the room
                 string[] roomSpecs = s.Split(',');
                 int id = int.Parse(roomSpecs[0]);
                 string enemyName = roomSpecs[1];
@@ -149,24 +150,36 @@ namespace YetAnotherDungeonCrawler
                 Enemy roomEnemy = null;
                 foreach (Enemy enemy in enemies)
                 {
+                    //Checks if the necessary enemy for the room, exists in the
+                    //existing enemies provided by the enemy file
                     if (enemyName == enemy.Name)
                     {
-                        roomEnemy = enemy;
+                        //Clones the enemy stats from the enemy in the HashSet
+                        roomEnemy = Enemy.Clone(enemy);
                     }
                 }
 
                 IItem roomItem = null;
+
+                //Checks if the item in the room is a HealthPotion
                 if (item == "HealthPotion")
                 {
+                    //Creates a new HealthPotion for that room
                     roomItem = new HealthPotion();
                 }
 
                 int[] exits = new int[4] { north, south, west, east };
 
+                //Creates a new room and adds it to the room list
                 rooms.Add(new Room(id, roomEnemy, roomItem, exits));
             }
         }
 
+        /// <summary>
+        /// Method to parse the provided room IDs into valid ints
+        /// </summary>
+        /// <param name="roomId"></param>
+        /// <returns></returns>
         private int RoomExit(string roomId)
         {
             if (roomId == "null")
@@ -180,7 +193,7 @@ namespace YetAnotherDungeonCrawler
         }
 
         /// <summary>
-        /// Checks if enemy is defeated
+        /// Checks if enemy is defeated and handles the player movement
         /// </summary>
         private void Move()
         {
@@ -193,7 +206,7 @@ namespace YetAnotherDungeonCrawler
             (north, south, west, east) = GetAvailableExits(exits);
 
             //check if the enemy is defeated first
-            //if its not, show a message and return to menu
+            //if its not, shows a message and return to menu
             if (roomEnemy != null)
             {
                 view.AttackBeforeMove();
@@ -204,10 +217,12 @@ namespace YetAnotherDungeonCrawler
 
             do
             {
-                view.ShowDirections(north, south, west, east);
-                exitOption = int.Parse(Console.ReadLine());
+                //Shows the valid exits and returns the input from the player
+                exitOption = view.ShowDirections(north, south, west, east);
 
                 // Determine the option specified by the user and act on it
+                // If the player wants to go to an invalid direction, shows
+                // a message saying that they can't
                 switch (exitOption)
                 {
                     case 1:
@@ -261,28 +276,36 @@ namespace YetAnotherDungeonCrawler
                         break;
                 }
 
-                view.AfterMenu();
-
                 // Keeps the loop going until player chooses 0
             } while (exitOption != 0);
         }
 
+        /// <summary>
+        /// Method to get booleans that represent the available exits of the
+        /// current room
+        /// </summary>
+        /// <param name="exits"></param>
+        /// <returns></returns>
         private (bool, bool, bool, bool) GetAvailableExits(int[] exits){
-            bool north = false;
-            bool south = false;
-            bool west = false;
-            bool east = false;
+            bool north = true;
+            bool south = true;
+            bool west = true;
+            bool east = true;
+
             if (exits[0] == 0){
-                north = true;
+                north = false;
             }
-            else if (exits[1] == 0){
-                south = true;
+
+            if (exits[1] == 0){
+                south = false;
             }
-            else if (exits[2] == 0){
-                west = true;
+
+            if (exits[2] == 0){
+                west = false;
             }
-            else if (exits[3] == 0){
-                east = true;
+
+            if (exits[3] == 0){
+                east = false;
             }
 
             return (north, south, west, east);
@@ -302,9 +325,11 @@ namespace YetAnotherDungeonCrawler
         /// <param name="roomId"></param>
         private void MovePlayer(int roomId, Direction direction)
         {
+            //Message to tell the player to which direction they moved
             view.MoveDirection(direction);
             foreach (Room room in rooms)
             {
+                //Moves the player to the correct room, using roomId
                 if (room.Id == roomId)
                 {
                     player.Move(room);
@@ -321,7 +346,10 @@ namespace YetAnotherDungeonCrawler
             //Checks if there is an item to pick
             if (player.CurrentRoom.Item != null)
             {
+                //Player adds the item to the inventory
                 player.PickUpItem(player.CurrentRoom.Item);
+                //Removes the item fro the room
+                player.CurrentRoom.ItemPickup();
             }
             else
             {
@@ -346,29 +374,33 @@ namespace YetAnotherDungeonCrawler
             if (enemy != null)
             {
                 //Attack the enemy
+                view.Attack(player.AttackPower);
                 player.Attack(enemy);
 
-                //Check if enemy died and remove if from the room if it did
+                //Check if enemy died and remove it from the room if it did
                 if (enemy.Health == 0)
                 {
                     player.CurrentRoom.Enemy = null;
                 }
                 else
                 {
-                    //------enemy attack needs to return true if player dies
-                    //check if player died after getting attacked
+                    //enemy attacks player if it didnt die when player attacked
+                    view.EnemyAttack(enemy.AttackPower);
                     enemy.Attack(player);
+                }
+
+                //checks if the player died after the fight
+                //changes the playerDead variable to true which will end the game
+                if (player.Health == 0)
+                {
+                    playerDead = true;
+                    view.DeadMessage();
                 }
             }
             else
             {
-                //Cant attack because there is no enemy in the room
+                //Tells the player that they picked an invalid option
                 InvalidOption();
-            }
-            if (player.Health == 0)
-            {
-                playerDead = true;
-                view.DeadMessage();
             }
 
             return playerDead;
@@ -380,13 +412,17 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         private void Heal()
         {
+            //Heals the player if they have enough potions, returning true if
+            // player had enough potions and false if they didn't
             bool heal = player.Heal();
             if (heal)
             {
+                //Will show the player their health after healing
                 view.UseHeal(player.Health);
             }
             else
             {
+                //Will tell the player that they don't have enough items
                 view.NotEnoughItems();
             }
         }

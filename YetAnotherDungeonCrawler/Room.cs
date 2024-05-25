@@ -32,7 +32,7 @@ namespace YetAnotherDungeonCrawler
         {
             Id = id;
             Enemy = enemy;
-            Item = Item;
+            Item = item;
             Exits = exits;
         }
 

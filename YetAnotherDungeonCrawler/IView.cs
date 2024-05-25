@@ -25,7 +25,7 @@ namespace YetAnotherDungeonCrawler
 
         int ShowActions(IItem item, Character enemy);
 
-        int ShowDirections(bool north, bool south, bool east, bool west);
+        int ShowDirections(bool north, bool south, bool west, bool east);
 
         void MoveDirection(Direction direction);
 
@@ -38,6 +38,8 @@ namespace YetAnotherDungeonCrawler
         void Attack(int damage);
 
         void EnemyAttack(int damage);
+
+        void EnemyDead();
 
         void PickUpMessage(IItem item);
 

@@ -17,5 +17,9 @@ namespace YetAnotherDungeonCrawler
             
         }
         
+        public static Enemy Clone(Enemy enemy){
+            Enemy clone = new Enemy (enemy.Name, enemy.Health, enemy.AttackPower);
+            return clone;
+        }
     }
 }
