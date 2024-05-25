@@ -28,7 +28,7 @@
 ---
 ### **Solution Architecture:**
 
-**YAP DO GOÇALO.**
+**CONTROLLER CLASSES HERE!**
 
 #### **Model Classes:**
 - **Character.cs:**
