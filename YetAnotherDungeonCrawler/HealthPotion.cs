@@ -13,8 +13,7 @@ namespace YetAnotherDungeonCrawler
         public string Name {get; set;} = "HealthPotion";        
         public int Use() 
         {
-            //player.Health += 10;
-            return 20;
+            return 50;
         }
     }
 }

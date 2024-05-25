@@ -17,13 +17,14 @@ namespace YetAnotherDungeonCrawler
 
         void AfterMenu();
 
-        int ShowActions(Player player);
+        int ShowActions(Player player, bool dungeonExit);
 
-        int ShowActions(Player player,IItem item);
+        int ShowActions(Player player,IItem item, bool dungeonExit);
 
-        int ShowActions(Player player,Character enemy);
+        int ShowActions(Player player,Character enemy, bool dungeonExit);
 
-        int ShowActions(Player player,IItem item, Character enemy);
+        int ShowActions(Player player,IItem item, Character enemy,
+            bool dungeonExit);
 
         int ShowDirections(bool north, bool south, bool west, bool east);
 
@@ -45,6 +46,8 @@ namespace YetAnotherDungeonCrawler
 
         void NotEnoughItems();
 
-        void UseHeal(int health);       
+        void UseHeal(int health);
+
+        void ExitDungeon();  
     }
 }
