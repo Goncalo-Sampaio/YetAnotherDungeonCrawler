@@ -2,6 +2,9 @@
 
 namespace YetAnotherDungeonCrawler
 {
+    /// <summary>
+    /// Starts the Game
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

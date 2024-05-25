@@ -21,6 +21,7 @@
 
 **João Nogueira:**
  - Classes View
+ - Map Drawing
 ---
 
 **Git Repository:** [GitHub] (https://github.com/Goncalo-Sampaio/YetAnotherDungeonCrawler.git)
@@ -105,26 +106,40 @@ classDiagram
 
 Character <|-- Enemy
 Character <|-- Player
+Player --> Room
+Player --> HealthPotion
+Player --> IItem
+HealthPotion ..|> IItem
+Room --> Enemy
+Room --> IItem
 
+View --> Direction
+View --> Player
+View --> Character
+View --> IItem
 
-UglyView o-- Player
-CompareByName ..|> IComparer
-CompareByName ..> Player
-Controller o-- Player
-Controller --> CompareByName
+IView --> Direction
+IView --> Player
+IView --> Character
+IView --> IItem
+
+Controller --> Direction 
 Controller --> IView
-Controller --> IComparer
-Controller ..> PlayerOrder
-Player ..|> IComparable
-Program o-- Player
-Program --> Controller
-Program --> UglyView
+Controller o-- Room
+Controller o-- Enemy
+Controller --> Player
+Controller --> IItem
+Controller --> HealthPotion
 
-<<interface>>IComparer
-<<interface>>IComparable
+Program --> Controller
+Program --> IView
+
+<<interface>>IItem
 <<interface>>IView
 
 ```
 
 ### **References:**
+
+ - [Mermaid] https://mermaid.js.org/syntax/classDiagram.html 
 ---
