@@ -73,6 +73,7 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         private void ReadEnemyFile()
         {
+            //Change this to relative path.
             string s;
             char sep = Path.DirectorySeparatorChar;
             using StreamReader r =
