@@ -28,7 +28,26 @@
 ---
 ## **Solution Architecture:**
 
-**CONTROLLER CLASSES HERE!**
+**Program.cs:**
+- Instantiates a new view and a controller, starting the game;
+
+**Controller.cs:**
+- Start Method where most of the game's logic will run:
+  - Starts by reading the Enemies file and creates them, adding them to a HashSet.
+  - Also reads the Rooms file, creating them and adding them o a list.
+  - Starts the main game loop:
+    - Shows the player's and current room's states.
+    - Shows a menu that changes the available options according to the room's state.
+    - Manages player's choices, checking if they are possible or not.
+    - If there's an enemy in the room, shows its state and allows the player to fight it.
+    - Uses methods from the Model to progress with the battle.
+    - Manages player's and enemy's health.
+    - Removes the enemy from the room if it died.
+    - If there's an item in the room, allows the player to pick it up, removing it from the room.
+    - Only allows the player to move to another room if there's no enemy in the current room.
+    - Manages the dungeon exit and the end of the game.
+  - Ends the game if the player died or escaped the dungeon.
+  - Shows a final message if the player quits the game, dies or escapes.
 
 #### **Model Classes:**
 

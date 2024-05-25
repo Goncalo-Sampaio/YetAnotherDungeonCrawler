@@ -10,7 +10,7 @@ namespace YetAnotherDungeonCrawler
     /// </summary>
     public class Player : Character
     {
-        private readonly int maxHealth;
+        public readonly int maxHealth;
         
         /// <summary>
         /// Reference of the Room the player is currently occupying

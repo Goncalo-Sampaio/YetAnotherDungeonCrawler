@@ -5,19 +5,6 @@ namespace YetAnotherDungeonCrawler
 {
     public class View : IView
     {
-        //Defining Variables
-        //private Map map;
-
-        private Controller controller;
-        private Player player;
-
-        //View Constructor
-        public View(Controller controller, Player player)
-        {
-            this.controller = controller;
-            this.player = player;
-        }
-
         //Welcome Players
         public void WelcomeMessage()
         {
@@ -228,18 +215,17 @@ namespace YetAnotherDungeonCrawler
         }
         private void ShowPlayerState(Player player)
         {
+            Console.WriteLine();
             Console.WriteLine("Player:");
             Console.WriteLine($"HP: {player.Health}/{player.maxHealth}");
-            Console.WriteLine($"Attack: {player.AttackPower}");
-
-            
+            Console.WriteLine($"Attack: {player.AttackPower}");    
         }
         private void ShowEnemyState(Character roomEnemy)
         {
+            Console.WriteLine();
             Console.WriteLine($"{roomEnemy.Name}:");
             Console.WriteLine($"HP: {roomEnemy.Health}");
             Console.WriteLine($"Attack: {roomEnemy.AttackPower}");
-
         }
     }
 }
