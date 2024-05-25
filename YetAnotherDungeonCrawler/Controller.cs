@@ -32,11 +32,15 @@ namespace YetAnotherDungeonCrawler
 
             int option;
             bool playerDead = false;
+            bool playerEscaped = false;
+            bool dungeonExit = false;
 
             do
             {
+                dungeonExit = player.CurrentRoom.Id == rooms.Last().Id;
+
                 // Show menu and get user option
-                option = DifferentMenu(player);
+                option = DifferentMenu(player, dungeonExit);
 
                 // Determine the option specified by the user and act on it
                 switch (option)
@@ -53,6 +57,9 @@ namespace YetAnotherDungeonCrawler
                     case 4:
                         Heal();
                         break;
+                    case 5:
+                        playerEscaped = ExitDungeon();
+                        break;
                     case 0:
                         view.EndMessage();
                         break;
@@ -64,9 +71,10 @@ namespace YetAnotherDungeonCrawler
                 view.AfterMenu();
 
                 // Keeps the loop going until player chooses 0
-            } while (option != 0 && playerDead == false);
+            } while (option != 0 && playerDead == false 
+                && playerEscaped == false);
         }
-        
+
         /// <summary>
         /// Method to read the provided enemy file line by line
         /// Will split the input to get each variable for the enemy
@@ -152,26 +160,27 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        private int DifferentMenu(Player player)
+        private int DifferentMenu(Player player, bool dungeonExit)
         {
             Enemy roomEnemy = player.CurrentRoom.Enemy;
             IItem roomItem = player.CurrentRoom.Item;
 
             if (roomEnemy == null && roomItem == null)
             {
-                return view.ShowActions(player);
+                return view.ShowActions(player, dungeonExit);
             }
             else if (roomEnemy == null)
             {
-                return view.ShowActions(player, roomItem);
+                return view.ShowActions(player, roomItem, dungeonExit);
             }
             else if (roomItem == null)
             {
-                return view.ShowActions(player, roomEnemy);
+                return view.ShowActions(player, roomEnemy, dungeonExit);
             }
             else
             {
-                return view.ShowActions(player, roomItem, roomEnemy);
+                return view.ShowActions(player, roomItem, roomEnemy, 
+                    dungeonExit);
             }
         }
 
@@ -286,25 +295,30 @@ namespace YetAnotherDungeonCrawler
         /// </summary>
         /// <param name="exits"></param>
         /// <returns></returns>
-        private (bool, bool, bool, bool) GetAvailableExits(int[] exits){
+        private (bool, bool, bool, bool) GetAvailableExits(int[] exits)
+        {
             bool north = true;
             bool south = true;
             bool west = true;
             bool east = true;
 
-            if (exits[0] == 0){
+            if (exits[0] == 0)
+            {
                 north = false;
             }
 
-            if (exits[1] == 0){
+            if (exits[1] == 0)
+            {
                 south = false;
             }
 
-            if (exits[2] == 0){
+            if (exits[2] == 0)
+            {
                 west = false;
             }
 
-            if (exits[3] == 0){
+            if (exits[3] == 0)
+            {
                 east = false;
             }
 
@@ -425,6 +439,34 @@ namespace YetAnotherDungeonCrawler
                 //Will tell the player that they don't have enough items
                 view.NotEnoughItems();
             }
+        }
+
+        /// <summary>
+        /// Method to check if the room has the exit and if the enemy is
+        /// defeated.
+        /// </summary>
+        /// <returns></returns>
+        private bool ExitDungeon()
+        {
+            //Checks if the its the last room (has the exit) and if the enemy
+            //is defeated
+            if (player.CurrentRoom.Id == rooms.Last().Id
+                && player.CurrentRoom.Enemy == null)
+            {
+                view.ExitDungeon();
+                return true;
+            }
+            else if (player.CurrentRoom.Id == rooms.Last().Id
+                && player.CurrentRoom.Enemy != null)
+            {
+                view.AttackBeforeMove();
+            }
+            else
+            {
+                InvalidOption();
+            }
+
+            return false;
         }
 
         /// <summary>

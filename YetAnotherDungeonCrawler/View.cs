@@ -55,15 +55,26 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions
-        public int ShowActions(Player player)
-        {   Console.WriteLine(">----------------------------------------<");
+        public int ShowActions(Player player, bool dungeonExit)
+        {
+            Console.WriteLine(">----------------------------------------<");
             Console.WriteLine(">---------|||THE ROOM IS EMPTY|||--------<");
             Console.WriteLine(">----------------------------------------<");
+            if (dungeonExit)
+            {
+                Console.WriteLine(">----------------------------------------<");
+                Console.WriteLine(">-----|||THE DUNGEON EXIT IS HERE!|||----<");
+                Console.WriteLine(">----------------------------------------<");
+            }
             ShowPlayerState(player);
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine("4. Use Item");
+            if (dungeonExit)
+            {
+                Console.WriteLine("5. ESCAPE!");
+            }
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -71,17 +82,27 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions when there is an Item
-        public int ShowActions(Player player,IItem item)
+        public int ShowActions(Player player, IItem item, bool dungeonExit)
         {
             Console.WriteLine(">----------------------------------------<");
             Console.WriteLine(">---|||THERE IS AN ITEM IN THE ROOM|||---<");
             Console.WriteLine(">----------------------------------------<");
+            if (dungeonExit)
+            {
+                Console.WriteLine(">----------------------------------------<");
+                Console.WriteLine(">-----|||THE DUNGEON EXIT IS HERE!|||----<");
+                Console.WriteLine(">----------------------------------------<");
+            }
             ShowPlayerState(player);
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
             Console.WriteLine($"2. Pick up {item.Name}");
             Console.WriteLine("4. Use Item");
+            if (dungeonExit)
+            {
+                Console.WriteLine("5. ESCAPE!");
+            }
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -89,11 +110,17 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions when there is an Enemy
-        public int ShowActions(Player player,Character enemy)
+        public int ShowActions(Player player, Character enemy, bool dungeonExit)
         {
             Console.WriteLine(">----------------------------------------<");
             Console.WriteLine(">---|||THERE IS AN ENEMY IN THE ROOM|||--<");
             Console.WriteLine(">----------------------------------------<");
+            if (dungeonExit)
+            {
+                Console.WriteLine(">----------------------------------------<");
+                Console.WriteLine(">-----|||THE DUNGEON EXIT IS HERE!|||----<");
+                Console.WriteLine(">----------------------------------------<");
+            }
             ShowPlayerState(player);
             ShowEnemyState(enemy);
             Console.WriteLine("\nYour available Actions");
@@ -101,6 +128,10 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("1. Move");
             Console.WriteLine($"3. Fight {enemy.Name}");
             Console.WriteLine("4. Use Item");
+            if (dungeonExit)
+            {
+                Console.WriteLine("5. ESCAPE!");
+            }
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -109,7 +140,8 @@ namespace YetAnotherDungeonCrawler
 
         //Display all available actions when there is an Item
         //And an Enemy
-        public int ShowActions(Player player,IItem item, Character enemy)
+        public int ShowActions(Player player, IItem item, Character enemy,
+            bool dungeonExit)
         {
             Console.WriteLine(">----------------------------------------<");
             Console.WriteLine(">---|||THERE IS AN ITEM IN THE ROOM|||---<");
@@ -117,6 +149,12 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">----------------------------------------<");
             Console.WriteLine(">---|||THERE IS AN ENEMY IN THE ROOM|||--<");
             Console.WriteLine(">----------------------------------------<");
+            if (dungeonExit)
+            {
+                Console.WriteLine(">----------------------------------------<");
+                Console.WriteLine(">-----|||THE DUNGEON EXIT IS HERE!|||----<");
+                Console.WriteLine(">----------------------------------------<");
+            }
             ShowPlayerState(player);
             ShowEnemyState(enemy);
             Console.WriteLine("\nYour available Actions");
@@ -125,6 +163,10 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine($"2. Pick up {item.Name}");
             Console.WriteLine($"3. Fight {enemy.Name}");
             Console.WriteLine("4. Heal");
+            if (dungeonExit)
+            {
+                Console.WriteLine("5. ESCAPE!");
+            }
             Console.WriteLine("0. Quit game");
             Console.Write("\nYour choice: ");
 
@@ -136,10 +178,10 @@ namespace YetAnotherDungeonCrawler
         {
             Console.WriteLine("\nYour available Direction Actions");
             Console.WriteLine(">------------------------------<\n");
-            if (north)  {Console.WriteLine("1. Move North");}
-            if (south)  {Console.WriteLine("2. Move South");}
-            if (west)   {Console.WriteLine("3. Move West");}
-            if (east)   {Console.WriteLine("4. Move East");}
+            if (north) { Console.WriteLine("1. Move North"); }
+            if (south) { Console.WriteLine("2. Move South"); }
+            if (west) { Console.WriteLine("3. Move West"); }
+            if (east) { Console.WriteLine("4. Move East"); }
             Console.WriteLine("0. Leave Move Action");
             Console.Write("\nYour choice: ");
 
@@ -213,12 +255,20 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("\nYou used an Health Potion!");
             ShowHealth(health);
         }
+
+        public void ExitDungeon()
+        {
+            Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">-----|||YOU ESCAPED THE DUNGEON!|||-----<");
+            Console.WriteLine(">---------|||CONGRATULATIONS!|||---------<");
+            Console.WriteLine(">----------------------------------------<");
+        }
         private void ShowPlayerState(Player player)
         {
             Console.WriteLine();
             Console.WriteLine("Player:");
             Console.WriteLine($"HP: {player.Health}/{player.maxHealth}");
-            Console.WriteLine($"Attack: {player.AttackPower}");    
+            Console.WriteLine($"Attack: {player.AttackPower}");
         }
         private void ShowEnemyState(Character roomEnemy)
         {
