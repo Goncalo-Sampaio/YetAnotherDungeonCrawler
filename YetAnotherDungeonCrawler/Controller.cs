@@ -112,6 +112,7 @@ namespace YetAnotherDungeonCrawler
 
         private void ReadEnemyFile()
         {
+            //Change this to relative path.
             string s;
             using StreamReader r =
                 new StreamReader("./YetAnotherDungeonCrawler/Enemies.txt");
