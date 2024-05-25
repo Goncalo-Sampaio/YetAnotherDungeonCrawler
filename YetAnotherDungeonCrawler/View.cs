@@ -68,8 +68,11 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions
-        public int ShowActions()
-        {
+        public int ShowActions(Player player)
+        {   Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">---------|||THE ROOM IS EMPTY|||--------<");
+            Console.WriteLine(">----------------------------------------<");
+            ShowPlayerState(player);
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
@@ -81,8 +84,12 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions when there is an Item
-        public int ShowActions(IItem item)
+        public int ShowActions(Player player,IItem item)
         {
+            Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">---|||THERE IS AN ITEM IN THE ROOM|||---<");
+            Console.WriteLine(">----------------------------------------<");
+            ShowPlayerState(player);
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
@@ -95,8 +102,13 @@ namespace YetAnotherDungeonCrawler
         }
 
         //Display all available actions when there is an Enemy
-        public int ShowActions(Character enemy)
+        public int ShowActions(Player player,Character enemy)
         {
+            Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">---|||THERE IS AN ENEMY IN THE ROOM|||--<");
+            Console.WriteLine(">----------------------------------------<");
+            ShowPlayerState(player);
+            ShowEnemyState(enemy);
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
@@ -110,8 +122,16 @@ namespace YetAnotherDungeonCrawler
 
         //Display all available actions when there is an Item
         //And an Enemy
-        public int ShowActions(IItem item, Character enemy)
+        public int ShowActions(Player player,IItem item, Character enemy)
         {
+            Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">---|||THERE IS AN ITEM IN THE ROOM|||---<");
+            Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">----------------------------------------<");
+            Console.WriteLine(">---|||THERE IS AN ENEMY IN THE ROOM|||--<");
+            Console.WriteLine(">----------------------------------------<");
+            ShowPlayerState(player);
+            ShowEnemyState(enemy);
             Console.WriteLine("\nYour available Actions");
             Console.WriteLine(">--------------------<\n");
             Console.WriteLine("1. Move");
@@ -205,6 +225,21 @@ namespace YetAnotherDungeonCrawler
         {
             Console.WriteLine("\nYou used an Health Potion!");
             ShowHealth(health);
+        }
+        private void ShowPlayerState(Player player)
+        {
+            Console.WriteLine("Player:");
+            Console.WriteLine($"HP: {player.Health}/{player.maxHealth}");
+            Console.WriteLine($"Attack: {player.AttackPower}");
+
+            
+        }
+        private void ShowEnemyState(Character roomEnemy)
+        {
+            Console.WriteLine($"{roomEnemy.Name}:");
+            Console.WriteLine($"HP: {roomEnemy.Health}");
+            Console.WriteLine($"Attack: {roomEnemy.AttackPower}");
+
         }
     }
 }
