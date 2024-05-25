@@ -66,36 +66,7 @@ namespace YetAnotherDungeonCrawler
                 // Keeps the loop going until player chooses 0
             } while (option != 0 && playerDead == false);
         }
-
-        /// <summary>
-        /// Method that shows a different menu depending on the current room's
-        /// state
-        /// </summary>
-        /// <param name="player"></param>
-        /// <returns></returns>
-        private int DifferentMenu(Player player)
-        {
-            Enemy roomEnemy = player.CurrentRoom.Enemy;
-            IItem roomItem = player.CurrentRoom.Item;
-
-            if (roomEnemy == null && roomItem == null)
-            {
-                return view.ShowActions();
-            }
-            else if (roomEnemy == null)
-            {
-                return view.ShowActions(roomItem);
-            }
-            else if (roomItem == null)
-            {
-                return view.ShowActions(roomEnemy);
-            }
-            else
-            {
-                return view.ShowActions(roomItem, roomEnemy);
-            }
-        }
-
+        
         /// <summary>
         /// Method to read the provided enemy file line by line
         /// Will split the input to get each variable for the enemy
@@ -171,6 +142,35 @@ namespace YetAnotherDungeonCrawler
 
                 //Creates a new room and adds it to the room list
                 rooms.Add(new Room(id, roomEnemy, roomItem, exits));
+            }
+        }
+
+        /// <summary>
+        /// Method that shows a different menu depending on the current room's
+        /// state
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        private int DifferentMenu(Player player)
+        {
+            Enemy roomEnemy = player.CurrentRoom.Enemy;
+            IItem roomItem = player.CurrentRoom.Item;
+
+            if (roomEnemy == null && roomItem == null)
+            {
+                return view.ShowActions(player);
+            }
+            else if (roomEnemy == null)
+            {
+                return view.ShowActions(player, roomItem);
+            }
+            else if (roomItem == null)
+            {
+                return view.ShowActions(player, roomEnemy);
+            }
+            else
+            {
+                return view.ShowActions(player, roomItem, roomEnemy);
             }
         }
 
@@ -366,7 +366,7 @@ namespace YetAnotherDungeonCrawler
             //Get the enemy from the current room
             Enemy enemy = player.CurrentRoom.Enemy;
 
-            //initizaling a variable to check if player is dead
+            //initializing a variable to check if player is dead
             bool playerDead = false;
 
             //Making sure the enemy exists
@@ -383,7 +383,7 @@ namespace YetAnotherDungeonCrawler
                 }
                 else
                 {
-                    //enemy attacks player if it didnt die when player attacked
+                    //enemy attacks player if it didn't die when player attacked
                     view.EnemyAttack(enemy.AttackPower);
                     enemy.Attack(player);
                 }

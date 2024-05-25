@@ -1,3 +1,4 @@
-Banana,30,10
-Morango,20,15
-Abacaxi,50,25
+Rat,10,5
+Flan,25,10
+Goblin,50,20
+Harpy,75,30
