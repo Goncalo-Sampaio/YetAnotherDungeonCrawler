@@ -5,16 +5,20 @@ namespace YetAnotherDungeonCrawler
 {
     public class View : IView
     {
-        //Welcome Players
+        /// <summary>
+        /// Welcome Players
+        /// </summary>
         public void WelcomeMessage()
         {
-            Console.WriteLine("Welcome to Yet Another Dungeon Crawler!");
+            Console.WriteLine("\nWelcome to Yet Another Dungeon Crawler!");
             Console.WriteLine(">-------------------------------------<\n");
             Console.Write("You are in a Dungeon, explore it and ");
             Console.WriteLine("defeat the Boss to win the Game!");
         }
 
-        //Tell the Player how to play
+        /// <summary>
+        /// Tell the Player how to play
+        /// </summary>
         public void Instructions()
         {
             Console.Write("\nThe Dungeon is divided by Rooms, where you can find Items and/or");
@@ -24,37 +28,54 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine("\n~~ How to Play? ~~");
             Console.WriteLine("You will receive a list with a couple of options.");
             Console.WriteLine("Choose one by typing a number on the Console.");
-            Console.WriteLine("And the most important Rule, have fun!");
+            Console.WriteLine("And the most important Rule, have fun!\n");
         }
 
-        //Tell the Player when they die
+        /// <summary>
+        /// Tell the Player when they die
+        /// </summary>
         public void DeadMessage()
         {
             Console.WriteLine("\nYou died...");
         }
 
-        //Thank the Player for playing
+        /// <summary>
+        /// Thank the Player for playing
+        /// </summary>
         public void EndMessage()
         {
             Console.WriteLine("\nThanks for playing our Dungeon Crawler!");
             Console.WriteLine("Hope you had Fun!");
         }
 
-        //General invalid option display
+        /// <summary>
+        /// General invalid option display
+        /// </summary>
         public void InvalidOption()
         {
             Console.WriteLine("\n>>> That is not a Valid Option! <<<");
             Console.WriteLine("Please try again...");
         }
 
-        //
+        /// <summary>
+        /// Before overloading the Player with information, ask for input
+        /// </summary>
         public void AfterMenu()
         {
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadLine();
         }
 
-        //Display all available actions
+        /// <summary>
+        /// Display all available actions and the Room
+        /// </summary>
+        /// <param name="player">
+        /// Current Player
+        /// </param>
+        /// <param name="dungeonExit">
+        /// If it's the the Dungeon Exit or not
+        /// </param>
+        /// <returns></returns>
         public int ShowActions(Player player, bool dungeonExit)
         {
             Console.WriteLine(">----------------------------------------<");
@@ -81,7 +102,19 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Display all available actions when there is an Item
+        /// <summary>
+        /// Display all available actions and the Room when there is an Item
+        /// </summary>
+        /// <param name="player">
+        /// Current Player
+        /// </param>
+        /// <param name="item">
+        /// Item's name which is in the Room
+        /// </param>
+        /// <param name="dungeonExit">
+        /// If it's the the Dungeon Exit or not
+        /// </param>
+        /// <returns></returns>
         public int ShowActions(Player player, IItem item, bool dungeonExit)
         {
             Console.WriteLine(">----------------------------------------<");
@@ -109,7 +142,19 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Display all available actions when there is an Enemy
+        /// <summary>
+        /// Display all available actions and the Room when there is an Enemy
+        /// </summary>
+        /// <param name="player">
+        /// Current Player
+        /// </param>
+        /// <param name="enemy">
+        /// The Enemy that is in this Room
+        /// </param>
+        /// <param name="dungeonExit">
+        /// If it's the the Dungeon Exit or not
+        /// </param>
+        /// <returns></returns>
         public int ShowActions(Player player, Character enemy, bool dungeonExit)
         {
             Console.WriteLine(">----------------------------------------<");
@@ -138,7 +183,22 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Display all available actions when there is an Item
+        /// <summary>
+        /// Display all available actions and the Room when there is an Item
+        /// </summary>
+        /// <param name="player">
+        /// Current Player
+        /// </param>
+        /// <param name="item">
+        /// Item's name which is in the Room
+        /// </param>
+        /// <param name="enemy">
+        /// The Enemy that is in this Room
+        /// </param>
+        /// <param name="dungeonExit">
+        /// If it's the the Dungeon Exit or not
+        /// </param>
+        /// <returns></returns>
         //And an Enemy
         public int ShowActions(Player player, IItem item, Character enemy,
             bool dungeonExit)
@@ -173,7 +233,24 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Display Move Action Menu
+        /// <summary>
+        /// Display Move Action Menu
+        /// </summary>
+        /// <param name="north">
+        /// If there's north exit or not
+        /// </param>
+        /// <param name="south">
+        /// If there's south exit or not
+        /// </param>
+        /// <param name="west">
+        /// If there's west exit or not
+        /// </param>
+        /// <param name="east">
+        /// If there's east exit or not
+        /// </param>
+        /// <returns>
+        /// Option the Player's chose
+        /// </returns>
         public int ShowDirections(bool north, bool south, bool west, bool east)
         {
             Console.WriteLine("\nYour available Direction Actions");
@@ -188,20 +265,30 @@ namespace YetAnotherDungeonCrawler
             return int.Parse(Console.ReadLine());
         }
 
-        //Tell the Player which direction they moved
+        /// <summary>
+        /// Tell the Player which direction they moved
+        /// </summary>
+        /// <param name="direction">
+        /// Direction which the Player moved
+        /// </param>
         public void MoveDirection(Direction direction)
         {
             Console.WriteLine($"\nYou moved {direction}!");
         }
 
-        //Tell the Player they can't move set direction
+        /// <summary>
+        /// Tell the Player they can't move set direction
+        /// </summary>
+        /// <param name="direction"></param>
         public void NotMove(Direction direction)
         {
             Console.WriteLine($"\n>>> You can't move {direction}! <<<");
             Console.WriteLine("Please try again...");
         }
 
-        //Remind the Player they can't move before killing the Enemy
+        /// <summary>
+        /// Remind the Player they can't move before killing the Enemy
+        /// </summary>
         public void AttackBeforeMove()
         {
             Console.Write("\n>>> You can't move before defeating the ");
@@ -209,53 +296,82 @@ namespace YetAnotherDungeonCrawler
             Console.Write("Please try again, after killing it...");
         }
 
-        //Display Player's Health
+        /// <summary>
+        /// Display Player's Health
+        /// </summary>
+        /// <param name="health">
+        /// Player's current health
+        /// </param>
         public void ShowHealth(int health)
         {
             Console.WriteLine($"You are at {health} Life now.");
         }
 
-        //Display when the Player attacks an Enemy
+        /// <summary>
+        /// Display when the Player attacks an Enemy
+        /// </summary>
+        /// <param name="damage">
+        /// Damage that was dealt to the enemy
+        /// </param>
         public void Attack(int damage)
         {
             Console.WriteLine("\nYou attacked the Monster!");
             Console.WriteLine($"You dealt {damage} Damage.");
         }
 
-        //Display when the Enemy attacks the Player
+        /// <summary>
+        /// Display when the Enemy attacks the Player
+        /// </summary>
+        /// <param name="damage">
+        /// Damage the was dealt to the Player
+        /// </param>
         public void EnemyAttack(int damage)
         {
             Console.WriteLine("\nThe Monster attacked you!");
             Console.WriteLine($"You were dealt {damage} Damage.");
         }
 
-        //Tell the Player the Enemy is dead
+        /// <summary>
+        /// Tell the Player the Enemy is dead
+        /// </summary>
         public void EnemyDead()
         {
             Console.WriteLine("\nThe Monster died!");
             Console.WriteLine("Good Job!");
         }
 
-        //Tell the Player they picked an Item
+        /// <summary>
+        /// Tell the Player they picked an Item
+        /// </summary>
+        /// <param name="item">
+        /// Item name which is picked up
+        /// </param>
         public void PickUpMessage(IItem item)
         {
             Console.WriteLine($"You picked up a {item.Name}.");
         }
 
-        //Tell the PLayer they don't have enough Items
+        /// <summary>
+        /// Tell the PLayer they don't have enough Items
+        /// </summary>
         public void NotEnoughItems()
         {
             Console.WriteLine("\n>>> You don't have enough Items <<<");
             Console.WriteLine("Please try again when you have an Item...");
         }
 
-        //Display text when Player heals
+        /// <summary>
+        /// Display text when Player heals
+        /// </summary>
+        /// <param name="health"></param>
         public void UseHeal(int health)
         {
             Console.WriteLine("\nYou used an Health Potion!");
             ShowHealth(health);
         }
-
+        /// <summary>
+        /// Tell the player they won the game
+        /// </summary>
         public void ExitDungeon()
         {
             Console.WriteLine(">----------------------------------------<");
@@ -263,6 +379,10 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine(">---------|||CONGRATULATIONS!|||---------<");
             Console.WriteLine(">----------------------------------------<");
         }
+        /// <summary>
+        /// Display Player's health and attack
+        /// </summary>
+        /// <param name="player"></param>
         private void ShowPlayerState(Player player)
         {
             Console.WriteLine();
@@ -270,6 +390,10 @@ namespace YetAnotherDungeonCrawler
             Console.WriteLine($"HP: {player.Health}/{player.maxHealth}");
             Console.WriteLine($"Attack: {player.AttackPower}");
         }
+        /// <summary>
+        /// Display Enemy's health and attack
+        /// </summary>
+        /// <param name="roomEnemy"></param>
         private void ShowEnemyState(Character roomEnemy)
         {
             Console.WriteLine();
